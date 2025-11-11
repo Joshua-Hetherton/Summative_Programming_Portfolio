@@ -86,10 +86,14 @@ class GUI:
 
 
     #Creates a button that can be clicked to access anything (self, text, colour, position x, position y, command)
-    def create_button(self, text, x_pos, y_pos, command, colour, parent, pad_x=5, pad_y=5):
-        button = tk.Button(parent, text=text,bg=colour, command=command )
+    def create_button(self, text, x_pos, y_pos, command, colour, parent,sticky=None, pad_x=5, pad_y=5):
+        button = tk.Button(parent, text=text,bg=colour, command=command)
         #Change to grid format later
-        button.grid(row=y_pos, column=x_pos, padx=pad_x, pady=pad_y)
+        if sticky:
+            button.grid(row=y_pos, column=x_pos, padx=pad_x, pady=pad_y, sticky=sticky)
+        else:
+            button.grid(row=y_pos, column=x_pos, padx=pad_x, pady=pad_y)
+        return button
 
     def create_label(self, text, x_pos, y_pos, parent, font_size=12):
         label=tk.Label(parent, text=text, font=("Arial",font_size), bg="yellow")
@@ -110,7 +114,26 @@ class GUI:
     #Sidebar Implementation
     """Allows the User to easily navigate between the different algorithms implemented"""
     def sidebar(self, parent):
-        self.create_button("Main Menu", 0, 0 , lambda: self.show_frame(self.main_menu_frame), "lightgrey", parent)
+        """All Buttons needed:
+        main_menu_frame,
+        rsa_frame,
+        fib_frame,
+        sorting_frame,
+        brute_force_frame,
+        random_deck_frame,
+        factorial_calc_frame,
+        search_frame,
+        palindrome_frame"""
+        self.create_button("Main Menu", 0, 0 , lambda: self.show_frame(self.main_menu_frame), "lightgrey", parent, sticky="w")
+        self.create_button("RSA", 0, 1 , lambda: self.show_frame(self.rsa_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Nth Fibonacci", 0, 2 , lambda: self.show_frame(self.fib_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Bubble Sort", 0, 3 , lambda: self.show_frame(self.sorting_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Brute Force Merge Sort", 0, 4 , lambda: self.show_frame(self.brute_force_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Randomised Deck", 0, 5 , lambda: self.show_frame(self.random_deck_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Recursion", 0, 6 , lambda: self.show_frame(self.factorial_calc_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Search", 0, 7 , lambda: self.show_frame(self.search_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Palindrome", 0, 8 , lambda: self.show_frame(self.palindrome_frame), "lightgrey", parent, sticky="w")
+
         
         
         pass
