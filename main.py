@@ -20,8 +20,8 @@ class GUI:
         self.setup_window()
         self.create_frame()
         self.sidebar(self.sidebar_frame)
-        self.main_menu()
         self.all_guis()
+        self.main_menu()
         self.show_frame(self.main_menu_frame)
         
     def setup_window(self):
@@ -159,7 +159,7 @@ class GUI:
 
     ##Randomised
     def random_deck_gui(self):
-        pass
+        self.show_frame(self.random_deck_frame)
 
     ##Recursion
     def factorial_calculator_gui(self):
