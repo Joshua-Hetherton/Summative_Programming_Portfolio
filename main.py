@@ -20,7 +20,7 @@ class GUI:
         self.setup_window()
         self.create_frame()
         self.sidebar(self.sidebar_frame)
-        self.all_guis()
+
         self.main_menu()
         self.show_frame(self.main_menu_frame)
         
@@ -107,9 +107,10 @@ class GUI:
 
     #Welcome/Main Menu Implementation
     def main_menu(self):
-        self.show_frame(self.main_menu_frame)
         self.create_label("Welcome to the Summative Assignment", 1, 2, self.main_menu_frame, font_size=20)
         self.create_label("Please select an algorithm from the sidebar to view its implementation", 1, 3, self.main_menu_frame, font_size=14)
+
+
 
     #Sidebar Implementation
     """Allows the User to easily navigate between the different algorithms implemented"""
@@ -142,7 +143,7 @@ class GUI:
 
     ##RSA
     def rsa_encryption_gui(self):
-        # self.show_frame(self.rsa_frame)
+
         pass
 
     ##Dynamic Programminga
@@ -159,7 +160,13 @@ class GUI:
 
     ##Randomised
     def random_deck_gui(self):
-        self.show_frame(self.random_deck_frame)
+        self.create_label("Randomised Deck of Cards",0, 0, self.random_deck_frame, font_size=16)
+        self.create_label("Shuffles a standard deck of cards using the Fisher-Yates Shuffle Algorithm", 0, 1, self.random_deck_frame, font_size=12)
+        cards=random_deck.create_deck()
+
+        pass
+    def shuffle_deck(self):
+        pass
 
     ##Recursion
     def factorial_calculator_gui(self):
