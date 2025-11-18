@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import scrolledtext
 
 import rsa_encryption
 import nth_fib
@@ -96,7 +97,7 @@ class GUI:
         return button
 
     def create_label(self, text, x_pos, y_pos, parent, font_size=12):
-        label=tk.Label(parent, text=text, font=("Arial",font_size), bg="yellow")
+        label=tk.Label(parent, text=text, font=("Arial",font_size), bg=parent["bg"])
         label.grid(row=y_pos, column=x_pos)
 
     def create_entry(self,x_pos, y_pos, parent):
@@ -159,14 +160,43 @@ class GUI:
         pass
 
     ##Randomised
-    def random_deck_gui(self):
-        self.create_label("Randomised Deck of Cards",0, 0, self.random_deck_frame, font_size=16)
-        self.create_label("Shuffles a standard deck of cards using the Fisher-Yates Shuffle Algorithm", 0, 1, self.random_deck_frame, font_size=12)
-        cards=random_deck.create_deck()
+    def shuffle_deck(self,unshuffled_deck):
+
+
 
         pass
-    def shuffle_deck(self):
-        pass
+
+    def show_deck(self, unshuffled_deck):
+        self.cards.configure(state='normal')
+        self.cards.delete(1.0, tk.END)
+        for i in range(0, len(unshuffled_deck), 13):
+            row=unshuffled_deck[ i:i+13]
+            self.cards.insert(tk.END, ", ".join(row)+"\n")
+        
+    def shuffle_deck(self, unshuffled_deck):
+        self.cards.delete(1.0, tk.END)
+        self.cards.configure(state='normal')
+        shuffled_deck=random_deck.Fisher_Yates_Shuffle(unshuffled_deck.copy())
+        self.show_deck(shuffled_deck)
+        self.cards.configure(state='disabled')
+
+    def random_deck_gui(self):
+        self.create_label("Randomised Deck of Cards",1, 0, self.random_deck_frame, font_size=16)
+        self.create_label("Shuffles a standard deck of cards using the Fisher-Yates Shuffle Algorithm", 1, 1, self.random_deck_frame, font_size=12)
+        
+        cards=random_deck.create_deck()
+        #Shows original deck
+        self.cards=scrolledtext.ScrolledText(self.random_deck_frame,width=90, height=10, wrap=tk.WORD, font=("Arial", 12), state="normal")
+        self.cards.grid(row=2,column=0, columnspan= 4, padx=10, pady=10)
+        self.show_deck(cards)
+        self.cards.configure(state='disabled')
+
+
+        #Shuffle Button
+        self.create_button("Shuffle Deck", 1, 3, lambda: self.shuffle_deck(cards), "lightgrey", self.random_deck_frame)
+        #Revert to Original Deck
+        self.create_button("Revert to Original Deck", 2, 3, lambda: self.show_deck(cards), "lightgrey", self.random_deck_frame)
+
 
     ##Recursion
     def factorial_calculator_gui(self):
