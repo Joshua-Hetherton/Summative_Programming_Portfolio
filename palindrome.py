@@ -2,9 +2,6 @@
 You should allow the user to input the initial string.
 """
 
-
-        
-
 def palindrome_substrings_count(str):
     counter=0
     len_str = len(str)

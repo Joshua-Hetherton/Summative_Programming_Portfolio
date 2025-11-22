@@ -111,8 +111,6 @@ class GUI:
         self.create_label("Welcome to the Summative Assignment", 1, 2, self.main_menu_frame, font_size=20)
         self.create_label("Please select an algorithm from the sidebar to view its implementation", 1, 3, self.main_menu_frame, font_size=14)
 
-
-
     #Sidebar Implementation
     """Allows the User to easily navigate between the different algorithms implemented"""
     def sidebar(self, parent):
@@ -160,12 +158,6 @@ class GUI:
         pass
 
     ##Randomised
-    def shuffle_deck(self,unshuffled_deck):
-
-
-
-        pass
-
     def show_deck(self, unshuffled_deck):
         self.cards.configure(state='normal')
         self.cards.delete(1.0, tk.END)
@@ -176,7 +168,7 @@ class GUI:
     def shuffle_deck(self, unshuffled_deck):
         self.cards.delete(1.0, tk.END)
         self.cards.configure(state='normal')
-        shuffled_deck=random_deck.Fisher_Yates_Shuffle(unshuffled_deck.copy())
+        shuffled_deck=random_deck.Fisher_yates_shuffle(unshuffled_deck.copy())
         self.show_deck(shuffled_deck)
         self.cards.configure(state='disabled')
 
@@ -199,12 +191,22 @@ class GUI:
 
 
     ##Recursion
+    def show_factoral(self, user_factorial):
+        pass
+
     def factorial_calculator_gui(self):
+        self.create_label("Recursive Factorial Calculator",1, 0, self.random_deck_frame, font_size=16)
+        self.create_label("Uses a recursion to find the factorials from a given number", 1, 1, self.random_deck_frame, font_size=12)
+        self.create_label("Enter a number: ", 0,2, self.factorial_calc_frame)
+        self.user_factorial_entry=self.create_entry(1,2, self.factorial_calc_frame)
+
+        #Showing result
         pass
 
     ##Search
     def search_gui(self):
         pass
+
 
     ##Dynamic Programming
     def palindrome_gui(self):

@@ -21,7 +21,7 @@ Explanation from Wikipedia (https://en.wikipedia.org/wiki/Fisher–Yates_shuffle
 https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm
 
 """
-def Fisher_Yates_Shuffle(list):
+def Fisher_yates_shuffle(list):
     shuffled_list=list
     for i in range(len(shuffled_list)-1, 0,-1):
         j= rand.randint(0, i+1)
