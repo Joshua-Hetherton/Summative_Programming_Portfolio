@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import scrolledtext
+from tkinter import scrolledtext, messagebox
 
 import rsa_encryption
 import nth_fib
@@ -197,32 +197,44 @@ class GUI:
         self.create_label("Recursive Factorial Calculator",1, 0, self.factorial_calc_frame, font_size=16)
         self.create_label("Uses a recursion to find the factorials from a given number", 1, 1, self.factorial_calc_frame, font_size=12)
         self.create_label("Enter a number: ", 1,2, self.factorial_calc_frame)
-        try:
 
-            self.user_factorial_entry=self.create_entry(1,3, self.factorial_calc_frame)
-            #Submit Button
-            self.create_button("Calculate Factorial", 1,4,lambda: show_factorial_result(), "lightgrey", self.factorial_calc_frame)
-
-            #Showing Result
-            def show_factorial_result():
-                #Convert Entry Object to integer
+        self.user_factorial_entry=self.create_entry(1,3, self.factorial_calc_frame)
+        
+        #Initialising Scrolled Text Box
+        self.result_text=scrolledtext.ScrolledText(self.factorial_calc_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.result_text.grid(row=5, column=1, padx=10, pady=10)
+        #Showing Result
+        def show_factorial_result():
+            try:
+                #Convert Entry Object to integer type
                 user_input=int(self.user_factorial_entry.get())
-                #Gets Result
-                result=factorial_calc.calculate_factorial(user_input)
-                #Displays Result
-                self.create_label(f"{user_input}! = {result}", 1,5, self.factorial_calc_frame, font_size=14)
+                #Gets the Result, and coverts it into a string
+                ## This is done to allow it to be displayed in a scrolled text box
+                result=str(factorial_calc.calculate_factorial(user_input))
 
-                pass
-        except ValueError:
-            pass
+                
+
+                #Scrollable Result, as to avoid the window expanding beyond screen size#
+                ##Deletes any previous text
+                self.result_text.delete(1.0, tk.END)
+
+                ##Specifies the length to go to until going to a new line
+                wrap_length=49
+
+                ##Inserts the result within the wrap length
+                wrapping = '\n'.join([result[i:i+wrap_length] for i in range(0, len(str(result)), wrap_length)])
+                self.result_text.insert(tk.END,wrapping)
+
+                
+            except ValueError:
+                self.result_text.delete(1.0, tk.END)
+                messagebox.showerror("Error", "Something went Wrong! Please Try Again!")
+            except RecursionError:
+                self.result_text.delete(1.0, tk.END)
+                messagebox.showerror("Error", "The Number entered exceeded the limit of the recursion depth in Python (1000).\nPlease Enter a Smaller Number!")
         #Submit Button
-       
+        self.create_button("Calculate Factorial", 1,4,lambda: show_factorial_result(), "lightgrey", self.factorial_calc_frame)
         
-        
-
-
-
-        pass
 
     ##Search
     def search_gui(self):
