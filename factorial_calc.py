@@ -9,4 +9,4 @@ def calculate_factorial(user_input):
         return 1
     
     else:
-        return f"{calculate_factorial(user_input-1) * user_input},"
+        return calculate_factorial(user_input-1) * user_input

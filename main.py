@@ -191,20 +191,33 @@ class GUI:
 
 
     ##Recursion
-    def show_factoral(self, user_factorial):
-        print(user_factorial)
-        print(factorial_calc.calculate_factorial(int(user_factorial)))
-        pass
+
 
     def factorial_calculator_gui(self):
         self.create_label("Recursive Factorial Calculator",1, 0, self.factorial_calc_frame, font_size=16)
         self.create_label("Uses a recursion to find the factorials from a given number", 1, 1, self.factorial_calc_frame, font_size=12)
         self.create_label("Enter a number: ", 1,2, self.factorial_calc_frame)
-        self.user_factorial_entry=self.create_entry(1,3, self.factorial_calc_frame)
+        try:
+
+            self.user_factorial_entry=self.create_entry(1,3, self.factorial_calc_frame)
+            #Submit Button
+            self.create_button("Calculate Factorial", 1,4,lambda: show_factorial_result(), "lightgrey", self.factorial_calc_frame)
+
+            #Showing Result
+            def show_factorial_result():
+                result=factorial_calc.calculate_factorial(self.user_factorial_entry)
+                self.create_label(f"{self.user_factorial_entry}! = {result}", 1,5, self.factorial_calc_frame, font_size=14)
+
+                pass
+        except ValueError:
+            pass
+        #Submit Button
+       
+        
+        
 
 
-        #Showing result
-        self.create_button("Calculcate Factorial", 1,4, lambda:self.show_factoral(self.user_factorial_entry.get()), "lightgrey", self.factorial_calc_frame)
+
         pass
 
     ##Search
