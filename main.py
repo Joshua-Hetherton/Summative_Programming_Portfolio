@@ -205,8 +205,12 @@ class GUI:
 
             #Showing Result
             def show_factorial_result():
-                result=factorial_calc.calculate_factorial(self.user_factorial_entry)
-                self.create_label(f"{self.user_factorial_entry}! = {result}", 1,5, self.factorial_calc_frame, font_size=14)
+                #Convert Entry Object to integer
+                user_input=int(self.user_factorial_entry.get())
+                #Gets Result
+                result=factorial_calc.calculate_factorial(user_input)
+                #Displays Result
+                self.create_label(f"{user_input}! = {result}", 1,5, self.factorial_calc_frame, font_size=14)
 
                 pass
         except ValueError:
