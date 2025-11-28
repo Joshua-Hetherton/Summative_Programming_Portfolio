@@ -130,13 +130,10 @@ class GUI:
         self.create_button("Bubble Sort", 0, 3 , lambda: self.show_frame(self.sorting_frame), "lightgrey", parent, sticky="w")
         self.create_button("Brute Force Merge Sort", 0, 4 , lambda: self.show_frame(self.brute_force_frame), "lightgrey", parent, sticky="w")
         self.create_button("Randomised Deck", 0, 5 , lambda: self.show_frame(self.random_deck_frame), "lightgrey", parent, sticky="w")
-        self.create_button("Recursion", 0, 6 , lambda: self.show_frame(self.factorial_calc_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Factorial", 0, 6 , lambda: self.show_frame(self.factorial_calc_frame), "lightgrey", parent, sticky="w")
         self.create_button("Search", 0, 7 , lambda: self.show_frame(self.search_frame), "lightgrey", parent, sticky="w")
         self.create_button("Palindrome", 0, 8 , lambda: self.show_frame(self.palindrome_frame), "lightgrey", parent, sticky="w")
 
-        
-        
-        pass
 
     #=== Implementation of all required Algorithms ===#
 
@@ -164,6 +161,7 @@ class GUI:
         for i in range(0, len(unshuffled_deck), 13):
             row=unshuffled_deck[ i:i+13]
             self.cards.insert(tk.END, ", ".join(row)+"\n")
+        self.cards.configure(state='disabled')
         
     def shuffle_deck(self, unshuffled_deck):
         self.cards.delete(1.0, tk.END)
@@ -174,7 +172,7 @@ class GUI:
 
     def random_deck_gui(self):
         self.create_label("Randomised Deck of Cards",1, 0, self.random_deck_frame, font_size=16)
-        self.create_label("Shuffles a standard deck of cards using the Fisher-Yates Shuffle Algorithm", 1, 1, self.random_deck_frame, font_size=12)
+        self.create_label("Shuffles a standard deck of cards using the Fisher-Yates Shuffle Algorithm", 1, 1, self.random_deck_frame)
         
         cards=random_deck.create_deck()
         #Shows original deck
@@ -243,6 +241,9 @@ class GUI:
 
     ##Dynamic Programming
     def palindrome_gui(self):
+        self.create_label("Palindrome Substring Counter", 1,0, self.palindrome_frame, font_size=16)
+        self.create_label("Uses memorisation to count all the Palindrome Substrins in a given string", 1, 1, self.palindrome_frame)
+        self.user_palindrome_entry= self.create_entry(1,2,self.palindrome_frame)
         pass
     
     #== Design Patterns ==#
