@@ -26,13 +26,27 @@ class GUI:
         self.show_frame(self.main_menu_frame)
         
     def setup_window(self):
+        """
+        A function to setup the window title and size
+        
+        """
         self.root.title("Summative Assignment")
         self.root.geometry("1080x720")
 
     def show_frame(self, frame):
+        """
+        Raises the selected frame to the front for viewing
+        
+        Args:
+            frame (tk.Frame): The frame which needs to be raised
+        """
         frame.tkraise()
 
     def all_guis(self):
+        """
+        Loads the GUI implementations for each algorithm
+        
+        """
         self.rsa_encryption_gui()
         self.nth_fib_gui()
         self.sorting_gui()
@@ -45,6 +59,11 @@ class GUI:
 
 
     def create_frame(self):
+        """
+        Creates all the frames needed for the GUI, setting the specific widths, heights and colours
+        Includes the main menu frame, sidebar frame and all algorithm frames
+        
+        """
         self.configure_grid_layout(self.root, 1, 2)
         #Main menu Frame
         self.main_menu_frame=tk.Frame(self.root, bg="white")
@@ -78,6 +97,15 @@ class GUI:
 
     #Configuring Grid Layout
     def configure_grid_layout(self, parent, rows, columns):
+        """
+        Configures the grid layout for a given parent widget
+        
+        Args:
+            parent (tk.Widget): The widget that needs configuring
+            rows (int): How many allocated rows there are
+            columns (int): How many allocated columns there are
+
+        """
         for row in range(rows):
             parent.grid_rowconfigure(row, weight=1)
         for column in range(columns):
@@ -88,6 +116,20 @@ class GUI:
 
     #Creates a button that can be clicked to access anything (self, text, colour, position x, position y, command)
     def create_button(self, text, x_pos, y_pos, command, colour, parent,sticky=None, pad_x=5, pad_y=5):
+        """
+        An easy and convienient way to create buttons within the GUI
+        
+        Args:
+            text (str): The text to be displayed on the button
+            x_pos (int): The height at which the button is placed
+            y_pos (int): The width at which the button is placed
+            command: A command to be executed when the button is clicked
+            colour (str): The background colour of the button
+            parent (tk.Widget): The parent widget in which the button is placed
+            sticky (str): How the button expands within its grid cell
+            pad_x (int): The horizontal padding around the button
+            pad_y (int): The vertical padding around the button
+        """
         button = tk.Button(parent, text=text,bg=colour, command=command)
         #Change to grid format later
         if sticky:
@@ -97,10 +139,28 @@ class GUI:
         return button
 
     def create_label(self, text, x_pos, y_pos, parent, font_size=12):
+        """
+        An easy way to create labels within the GUI
+        
+        Args:
+            text (str): The text to be displayed on the label
+            x_pos (int): The height at which the label is placed
+            y_pos (int): The width at which the label is placed
+            parent (tk.Widget): The parent widget in which the label is placed
+            font_size (int): The font size of the label text
+        """
         label=tk.Label(parent, text=text, font=("Arial",font_size), bg=parent["bg"])
         label.grid(row=y_pos, column=x_pos)
 
     def create_entry(self,x_pos, y_pos, parent):
+        """
+        An easy way to create entry fields within the GUI
+        
+        Args:
+            x_pos (int): The height at which the entry field is placed
+            y_pos (int): The width at which the entry field is placed
+            parent (tk.Widget): The parent widget in which the entry field is placed
+        """
         entry=tk.Entry(parent, width=30)
         entry.grid(row=y_pos, column=x_pos)
         return entry
@@ -108,22 +168,22 @@ class GUI:
 
     #Welcome/Main Menu Implementation
     def main_menu(self):
+        """
+        The first frame the user sees when opening the program, displaying the welcome message and instructions
+        
+        """
         self.create_label("Welcome to the Summative Assignment", 1, 2, self.main_menu_frame, font_size=20)
         self.create_label("Please select an algorithm from the sidebar to view its implementation", 1, 3, self.main_menu_frame, font_size=14)
 
     #Sidebar Implementation
-    """Allows the User to easily navigate between the different algorithms implemented"""
     def sidebar(self, parent):
-        """All Buttons needed:
-        main_menu_frame,
-        rsa_frame,
-        fib_frame,
-        sorting_frame,
-        brute_force_frame,
-        random_deck_frame,
-        factorial_calc_frame,
-        search_frame,
-        palindrome_frame"""
+        """
+        The sidebar which contains all the buttons to access each algorithm frame
+        
+        Args:
+            parent (tk.Widget): The parent widget in which the sidebar is placed
+            
+        """
         self.create_button("Main Menu", 0, 0 , lambda: self.show_frame(self.main_menu_frame), "lightgrey", parent, sticky="w")
         self.create_button("RSA", 0, 1 , lambda: self.show_frame(self.rsa_frame), "lightgrey", parent, sticky="w")
         self.create_button("Nth Fibonacci", 0, 2 , lambda: self.show_frame(self.fib_frame), "lightgrey", parent, sticky="w")
@@ -135,27 +195,55 @@ class GUI:
         self.create_button("Palindrome", 0, 8 , lambda: self.show_frame(self.palindrome_frame), "lightgrey", parent, sticky="w")
 
 
-    #=== Implementation of all required Algorithms ===#
+    """
+    Below are the Individual GUI implementations for each algorithm
+    Each gui function runs imported functions from their respective python files
+
+    """
 
     ##RSA
     def rsa_encryption_gui(self):
+        """
+        Docstring for rsa_encryption_gui
 
+        """
         pass
 
     ##Dynamic Programminga
     def nth_fib_gui(self):
+        """
+        Docstring for nth_fib_gui
+        
+        :param self: Description
+        """
         pass
 
     ##Sorting
     def sorting_gui(self):
+        """
+        Docstring for sorting_gui
+        
+        :param self: Description
+        """
         pass
 
     ##Brute Force
     def brute_force_gui(self):
+        """
+        Docstring for brute_force_gui
+        
+        :param self: Description
+        """
         pass
 
     ##Randomised
     def show_deck(self, unshuffled_deck):
+        """
+        Displays the deck of cards in the text widget
+        
+        Args:
+            unshuffled_deck (list[str]): The list of cards to display
+        """
         self.cards.configure(state='normal')
         self.cards.delete(1.0, tk.END)
         for i in range(0, len(unshuffled_deck), 13):
@@ -164,13 +252,25 @@ class GUI:
         self.cards.configure(state='disabled')
         
     def shuffle_deck(self, unshuffled_deck):
-        self.cards.delete(1.0, tk.END)
+        """
+        Runs the fisher Yates shuffle algorithm, and displays the shuffled deck to the user
+        
+        Args:
+            unshuffled_deck (list[str]): The list of cards to shuffle and display
+        """
+        
+        self.cards.delete(1.0, tk.END) #Removes the previous deck
         self.cards.configure(state='normal')
         shuffled_deck=random_deck.Fisher_yates_shuffle(unshuffled_deck.copy())
         self.show_deck(shuffled_deck)
-        self.cards.configure(state='disabled')
+        self.cards.configure(state='disabled') #Changes the scrolled text box to read only, preventing users editing it
 
     def random_deck_gui(self):
+        """
+        The specific GUI for the Randomised Deck Algorithm
+        It showcases the original deck, and allows the user to then shuffle the deck using the Fisher-Yates Shuffle Algorithm
+        
+        """
         self.create_label("Randomised Deck of Cards",1, 0, self.random_deck_frame, font_size=16)
         self.create_label("Shuffles a standard deck of cards using the Fisher-Yates Shuffle Algorithm", 1, 1, self.random_deck_frame)
         
@@ -188,10 +288,14 @@ class GUI:
         self.create_button("Revert to Original Deck", 2, 3, lambda: self.show_deck(cards), "lightgrey", self.random_deck_frame)
 
 
-    ##Recursion
 
 
     def factorial_calculator_gui(self):
+        """
+        The specific GUI for the Factorial Calculator Algorithm
+        Uses an entry box to get the user input, and outputs the result in a scrollable text box
+        
+        """
         self.create_label("Recursive Factorial Calculator",1, 0, self.factorial_calc_frame, font_size=16)
         self.create_label("Uses a recursion to find the factorials from a given number", 1, 1, self.factorial_calc_frame, font_size=12)
         self.create_label("Enter a number: ", 1,2, self.factorial_calc_frame)
@@ -236,17 +340,26 @@ class GUI:
 
     ##Search
     def search_gui(self):
+        """
+        Docstring for search_gui
+        
+        :param self: Description
+        """
         pass
 
 
     ##Dynamic Programming
     def palindrome_gui(self):
+        """
+        The specific GUI for the Palindrome Substring Counter Algorithm
+        It uses an entry box to get user input, and displays the result within a label
+        
+        """
         self.create_label("Palindrome Substring Counter", 1,0, self.palindrome_frame, font_size=16)
         self.create_label("Uses memorisation to count all the Palindrome Substrins in a given string", 1, 1, self.palindrome_frame)
         self.user_palindrome_entry= self.create_entry(1,2,self.palindrome_frame)
         pass
     
-    #== Design Patterns ==#
     
 
 def main():

@@ -1,10 +1,18 @@
-"""Palindrome Substrings counter using memoization.
-You should allow the user to input the initial string.
-"""
 
-def palindrome_substrings_count(str):
+
+def palindrome_substrings_count(input_str):
+    """
+    Counts all the Palindrome substrings in a given input string, using memorisation.
+    
+    Args:
+        input_str (str): The input string in which to count palindrome
+
+    Returns:
+        int: The count of palindrome substrings in the input string
+
+    """
     counter=0
-    len_str = len(str)
+    len_str = len(input_str)
     memory={}
 
     ##Checks if a substring is a palindrome
@@ -22,8 +30,7 @@ def palindrome_substrings_count(str):
         
         #Checks if only two characters are there, and if they are the same
         if start+1==end:
-            return str[start]==str[end]
-        #
+            return input_str[start]==input_str[end]
         
 
     #Checks for all possible substrings
