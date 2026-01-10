@@ -16,6 +16,8 @@ def combine_arrays(left_array, right_array):
         elif right_array[right_index] <= left_array[left_index]:
             output.append(right_array[right_index])
             right_index +=1
+
+            
     #Checks for any remaining elements not sorted, by appending any of the remaining elements onto the output
     output.extend(left_array[left_index:]+ right_array[right_index:])
 
@@ -25,9 +27,10 @@ def combine_arrays(left_array, right_array):
 
 def merge_sort(given_array):
     """
-    Docstring for merge_sort
+    Sorts a given array using the merge sort algorithm.
+    The array is split in half recursively until the length of an array is 1. It is then recombined in a sorted order.
     
-    :param list_to_sort: Description
+    given_array (List[int]): Description
     """
     if len(given_array)<=1:
         return given_array
