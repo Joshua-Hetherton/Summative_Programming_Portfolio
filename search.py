@@ -3,10 +3,23 @@ returns the largest, smallest, mode, median, 1st IQF & 3rd IQF of an array.
 User should be able to enter an array of their choice.
 """
 
-def find_largest():
+def find_largest(given_array):
     """
-    Docstring for find_largest
+    Given an array, it returns the largest value in the array given
+
+    Args:
+        given_array (List[int]): The array that was given by the user
+
+    Returns:
+        largest_value (int): The largest value in the array
     """
+    largest_value=None
+    for value in given_array:
+        
+        if value>largest_value:
+            largest_value=value
+
+    return largest_value
     pass
 
 def find_smallest():
