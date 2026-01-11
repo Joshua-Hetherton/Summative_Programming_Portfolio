@@ -24,7 +24,7 @@ def find_largest(given_array):
 
 def find_smallest(given_array):
     """
-    Given an array, it returns the largest value in the array given
+    Given an array, it returns the smallest value in the array given
 
     Args:
         given_array (List[int]): The array that was given by the user
