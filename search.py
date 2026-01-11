@@ -20,13 +20,25 @@ def find_largest(given_array):
             largest_value=value
 
     return largest_value
-    pass
 
-def find_smallest():
+
+def find_smallest(given_array):
     """
-    Docstring for find_smallest
+    Given an array, it returns the largest value in the array given
+
+    Args:
+        given_array (List[int]): The array that was given by the user
+
+    Returns:
+        smallests_value (int): The smallest value in the array
     """
-    pass
+    smallest_value=None
+    for value in given_array:
+        
+        if value < smallest_value:
+            smallest_value=value
+
+    return smallest_value
 
 def find_median():
     """
