@@ -2,7 +2,7 @@
 returns the largest, smallest, mode, median, 1st IQF & 3rd IQF of an array.
 User should be able to enter an array of their choice.
 """
-
+import sorting
 def find_largest(given_array):
     """
     Given an array, it returns the largest value in the array given
@@ -40,11 +40,29 @@ def find_smallest(given_array):
 
     return smallest_value
 
-def find_median():
+def find_median(given_array):
     """
-    Docstring for find_median
+    FInds the median of the array.
+    If there is no true middle, the 2 middle values will be averaged, otherwise, it returns the middle.
+    In this case, the array is sorted using
+    Args:
+        given_array (List[int]): The array that was given by the user
+    
+    Returns:
+        median_value (int): The median value of the array
     """
-    pass
+    sorted_array=sorting.bubble_sort(given_array, Ascending=True)
+    array_length=len(sorted_array)
+
+    #Checks the length of the array. If it is an even number, it averages the 2 middle values
+    if array_length % 2 ==0:
+        middle_1=sorted_array[array_length//2 - 1]
+        middle_2=sorted_array[array_length// 2 + 1]
+        median_value=(middle_1+middle_2)/2
+        return median_value
+
+    else:
+        return sorted_array[array_length//2]
 
 def find_mode():
     """
