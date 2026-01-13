@@ -57,7 +57,7 @@ def find_median(given_array):
     #Checks the length of the array. If it is an even number, it averages the 2 middle values
     if array_length % 2 ==0:
         middle_1=sorted_array[array_length//2 - 1]
-        middle_2=sorted_array[array_length// 2 + 1]
+        middle_2=sorted_array[array_length// 2]
         median_value=(middle_1+middle_2)/2
         return median_value
 
