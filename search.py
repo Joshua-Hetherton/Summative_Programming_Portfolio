@@ -51,8 +51,12 @@ def find_median(given_array):
     Returns:
         median_value (int): The median value of the array
     """
+    if array_length==0:
+        return None
+    
     sorted_array=sorting.bubble_sort(given_array, Ascending=True)
     array_length=len(sorted_array)
+
 
     #Checks the length of the array. If it is an even number, it averages the 2 middle values
     if array_length % 2 ==0:
