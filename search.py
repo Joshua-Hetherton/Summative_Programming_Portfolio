@@ -144,8 +144,25 @@ def is_array_valid(given_array):
     return True
 
 
-def calculate_statistics():
+def calculate_statistics(given_array):
     """
-    Docstring for calculate_statistics
+    Uses all the functions in search.py to calculate the statistics of a given array.
+    Args:
+        given_array (List[int]): The array given by the user
+    Returns:
+        statistics_list (List): A list containing the smallest, largest, mode, median, 1st IQF & 3rd IQF of the array
     """
+    statistics_list=[]
+
+    #Checking if array is valid
+    if not is_array_valid(given_array):
+        return None
+    
+    smallest=find_smallest(given_array)
+    largest=find_largest(given_array)
+    mode=find_mode(given_array)
+    median=find_median(given_array)
+    first_QR, third_QR=find_interquartial_range(given_array)
+
+    statistics_list.append(smallest, largest, mode, median, first_QR, third_QR)
     pass
