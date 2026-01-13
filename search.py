@@ -96,11 +96,30 @@ def find_mode(given_array):
     return find_max_frequency
 
 
-def find_interquartial_range():
+def find_interquartial_range(given_array):
     """
-    Docstring for find_interquartial_range
+    Finds the first and third interquartial range of the given array
+    Args:
+        given_array (List[int]): The array given by the user
+    Returns:
+
     """
-    pass
+    #Checks if the array is empty, as if it is empty, the IQR cant be found
+    if len(given_array)==0:
+        return None, None
+    
+    sorted_array=sorting.bubble_sort(given_array,Ascending=True)
+    array_length=len(sorted_array)
+
+    if array_length % 2 ==0:
+        lower_half=sorted_array[:array_length//2]
+        upper_half=sorted_array[array_length//2:]
+    else:
+        lower_half=sorted_array[:array_length//2]
+        upper_half=sorted_array[array_length//2+1:]
+
+    first_IQR=find_median(lower_half)
+    third_IQR=find_median(upper_half)
 
 def is_array_valid():
     """
