@@ -127,11 +127,22 @@ def find_interquartial_range(given_array):
 
     return first_Quart, third_Quart
 
-def is_array_valid():
+def is_array_valid(given_array):
     """
-    Docstring for is_array_valid
+    Checks if the array the user has provided is valid
     """
-    pass
+    #Checks if any element isnt an integer
+    if not all(isinstance(x, int) for x in given_array):
+        return False
+    #Checks given_array type
+    if not isinstance(given_array, list):
+        return False
+    
+    if len(given_array)==0:
+        return False
+    #Passes validation
+    return True
+
 
 def calculate_statistics():
     """
