@@ -64,11 +64,37 @@ def find_median(given_array):
     else:
         return sorted_array[array_length//2]
 
-def find_mode():
+def find_mode(given_array):
     """
-    Docstring for find_mode
+    Finds the mode of the given array.
+    The mode is the value that appears most often in the array.
+    A dictionary is used to keep track of the counts of each value that is found in the array
+
+    Args:
+        given_array (List[int]): The array given by the user
+
+    Returns:
+        find_max_frequency (int): The mode of the array
     """
-    pass
+    if len(given_array)==0:
+        return None
+    
+    frequency_dict={}
+    for value in given_array:
+        if value not in frequency_dict:
+            #If a new value is found, it is added to the dict with a count of 1
+            frequency_dict[value]=1
+        else:
+            frequency_dict[value]+=1
+    #Finding the value with the highest frequency
+    find_max_frequency=0
+    for i in frequency_dict:
+        if i > find_max_frequency:
+            find_max_frequency=i
+
+
+    return find_max_frequency
+
 
 def find_interquartial_range():
     """
