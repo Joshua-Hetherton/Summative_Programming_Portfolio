@@ -122,8 +122,10 @@ def find_interquartial_range(given_array):
         lower_half=sorted_array[:array_length//2]
         upper_half=sorted_array[array_length//2+1:]
 
-    first_IQR=find_median(lower_half)
-    third_IQR=find_median(upper_half)
+    first_Quart=find_median(lower_half)
+    third_Quart=find_median(upper_half)
+
+    return first_Quart, third_Quart
 
 def is_array_valid():
     """
