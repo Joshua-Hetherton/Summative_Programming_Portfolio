@@ -106,7 +106,8 @@ def find_interquartial_range(given_array):
     Args:
         given_array (List[int]): The array given by the user
     Returns:
-
+        first_Quart (int): The first interquartial range
+        third_Quart (int): The third interquartial range
     """
     #Checks if the array is empty, as if it is empty, the IQR cant be found
     if len(given_array)==0:
