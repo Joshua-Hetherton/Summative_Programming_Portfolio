@@ -100,7 +100,7 @@ def find_mode(given_array):
     return find_max_frequency
 
 
-def find_interquartial_range(given_array):
+def find_interquartile_range(given_array):
     """
     Finds the first and third interquartial range of the given array
     Args:
