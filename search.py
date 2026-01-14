@@ -163,7 +163,7 @@ def calculate_statistics(given_array):
     largest=find_largest(given_array)
     mode=find_mode(given_array)
     median=find_median(given_array)
-    first_QR, third_QR=find_interquartial_range(given_array)
+    first_QR, third_QR=find_interquartile_range(given_array)
 
     statistics_list.extend([smallest, largest, mode, median, first_QR, third_QR])
 
