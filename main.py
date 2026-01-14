@@ -363,6 +363,7 @@ class GUI:
             output=search.calculate_statistics(user_array)
             
             #Adds results to the scrollable text box
+            self.result_text.configure(state="normal")
             self.result_text.delete(1.0, tk.END)
 
             format_output=  (
