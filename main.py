@@ -367,7 +367,7 @@ class GUI:
             self.result_text.delete(1.0, tk.END)
 
             format_output=  (
-                """Smallest Value: {output[0]}\n
+                f"""Smallest Value: {output[0]}\n
                 Largest Value: {output[1]}\n"
                 Mode: {output[2]}\n"
                 Median: {output[3]}\n"
