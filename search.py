@@ -164,6 +164,6 @@ def calculate_statistics(given_array):
     median=find_median(given_array)
     first_QR, third_QR=find_interquartial_range(given_array)
 
-    statistics_list.append(smallest, largest, mode, median, first_QR, third_QR)
+    statistics_list.extend([smallest, largest, mode, median, first_QR, third_QR])
 
     return statistics_list
