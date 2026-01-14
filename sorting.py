@@ -4,5 +4,5 @@ User should be able to specify Ascending/Descending, default sort if not specifi
 """
 
 def bubble_sort(array,Ascending=True):
-    array=array.copy()
-    return array.sort()
+    array.sort()
+    return array
