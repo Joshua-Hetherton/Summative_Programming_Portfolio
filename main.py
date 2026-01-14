@@ -367,21 +367,16 @@ class GUI:
             self.result_text.delete(1.0, tk.END)
 
             format_output=  (
-                f"""Smallest Value: {output[0]}\n
-                Largest Value: {output[1]}\n"
-                Mode: {output[2]}\n"
-                Median: {output[3]}\n"
-                1st Interquartile Range: {output[4]}\n
-                3rd Interquartile Range: {output[5]}\n"""
-            )
+                f"""Smallest Value: {output[0]}
+Largest Value: {output[1]}
+Mode: {output[2]}
+Median: {output[3]}
+1st Interquartile Range: {output[4]}
+3rd Interquartile Range: {output[5]}""")
 
             self.result_text.insert(tk.END, format_output)
             self.result_text.configure(state="disabled")
-
-
-
             
-
         #Submit Button
         self.create_button("Find Statistics of Array", 1,4,lambda: show_search_result(), "lightgrey", self.search_frame)
 

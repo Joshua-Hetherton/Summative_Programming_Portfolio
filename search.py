@@ -93,7 +93,7 @@ def find_mode(given_array):
     #Finding the value with the highest frequency
     find_max_frequency=0
     for i in frequency_dict:
-        if i > find_max_frequency:
+        if frequency_dict[i] > find_max_frequency:
             find_max_frequency=i
 
 
