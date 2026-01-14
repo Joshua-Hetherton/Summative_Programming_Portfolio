@@ -352,7 +352,7 @@ class GUI:
         self.user_search_entry=self.create_entry(1,3,self.search_frame)
         
         #Initialising Scrolled Text Box
-        self.result_text=scrolledtext.ScrolledText(self.factorial_calc_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.result_text=scrolledtext.ScrolledText(self.search_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
         self.result_text.grid(row=5, column=1, padx=10, pady=10)
 
         #Showing Result
@@ -365,7 +365,16 @@ class GUI:
             #Adds results to the scrollable text box
             self.result_text.delete(1.0, tk.END)
 
-            self.result_text.insert(tk.END, output)
+            format_output=  (
+                """Smallest Value: {output[0]}\n
+                Largest Value: {output[1]}\n"
+                Mode: {output[2]}\n"
+                Median: {output[3]}\n"
+                1st Interquartile Range: {output[4]}\n
+                3rd Interquartile Range: {output[5]}\n"""
+            )
+
+            self.result_text.insert(tk.END, format_output)
             self.result_text.configure(state="disabled")
 
 
