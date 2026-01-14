@@ -341,10 +341,40 @@ class GUI:
     ##Search
     def search_gui(self):
         """
-        Docstring for search_gui
+        The specific GUI for the search.py functions
+        It uses an entry box to get the users list of numbers, and displays the releveant statistics withing a scrollable text box
         
-        :param self: Description
         """
+        self.create_label("Statistical Analysis", 1, 0, self.search_frame, font_size=16)
+        self.create_label("Enter a list of numbers, seperated by commas, to recieve the statistics of your array", 1, 1, self.search_frame)
+        self.create_label("Enter array: ", 1, 2, self.search_frame)
+
+        self.user_search_entry=self.create_entry(1,3,self.search_frame)
+        
+        #Initialising Scrolled Text Box
+        self.result_text=scrolledtext.ScrolledText(self.factorial_calc_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.result_text.grid(row=5, column=1, padx=10, pady=10)
+
+        #Showing Result
+        def show_search_result():
+            user_input=self.user_search_entry.get()
+            #coverts input into a list of integers:
+            user_array = [int(x.strip()) for x in user_input.split(",")]
+            output=search.calculate_statistics(user_array)
+            
+            #Adds results to the scrollable text box
+            self.result_text.delete(1.0, tk.END)
+            
+            self.result_text.insert(tk.END, output)
+            self.result_text.configure(state="disabled")
+
+
+
+            
+
+        #Submit Button
+        self.create_button("Find Statistics of Array", 1,4,lambda: (show_search_result()), "lightgrey", self.search_frame)
+
         pass
 
 
