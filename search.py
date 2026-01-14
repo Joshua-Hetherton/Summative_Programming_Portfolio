@@ -13,7 +13,7 @@ def find_largest(given_array):
     Returns:
         largest_value (int): The largest value in the array
     """
-    largest_value=None
+    largest_value=given_array[0]
     for value in given_array:
         
         if value>largest_value:
@@ -32,7 +32,7 @@ def find_smallest(given_array):
     Returns:
         smallests_value (int): The smallest value in the array
     """
-    smallest_value=None
+    smallest_value=given_array[0]
     for value in given_array:
         
         if value < smallest_value:
@@ -165,4 +165,5 @@ def calculate_statistics(given_array):
     first_QR, third_QR=find_interquartial_range(given_array)
 
     statistics_list.append(smallest, largest, mode, median, first_QR, third_QR)
-    pass
+
+    return statistics_list

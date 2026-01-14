@@ -364,7 +364,7 @@ class GUI:
             
             #Adds results to the scrollable text box
             self.result_text.delete(1.0, tk.END)
-            
+
             self.result_text.insert(tk.END, output)
             self.result_text.configure(state="disabled")
 
@@ -373,7 +373,7 @@ class GUI:
             
 
         #Submit Button
-        self.create_button("Find Statistics of Array", 1,4,lambda: (show_search_result()), "lightgrey", self.search_frame)
+        self.create_button("Find Statistics of Array", 1,4,lambda: show_search_result(), "lightgrey", self.search_frame)
 
         pass
 
