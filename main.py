@@ -350,8 +350,8 @@ class GUI:
         self.user_factorial_entry=self.create_entry(1,3, self.factorial_calc_frame)
         
         #Initialising Scrolled Text Box
-        self.result_text=scrolledtext.ScrolledText(self.factorial_calc_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
-        self.result_text.grid(row=5, column=1, padx=10, pady=10)
+        self.factorial_result_text=scrolledtext.ScrolledText(self.factorial_calc_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.factorial_result_text.grid(row=5, column=1, padx=10, pady=10)
         #Showing Result
         def show_factorial_result():
             try:
@@ -365,21 +365,21 @@ class GUI:
 
                 #Scrollable Result, as to avoid the window expanding beyond screen size#
                 ##Deletes any previous text
-                self.result_text.delete(1.0, tk.END)
+                self.factorial_result_text.delete(1.0, tk.END)
 
                 ##Specifies the length to go to until going to a new line
                 wrap_length=49
 
                 ##Inserts the result within the wrap length
                 wrapping = '\n'.join([result[i:i+wrap_length] for i in range(0, len(str(result)), wrap_length)])
-                self.result_text.insert(tk.END,wrapping)
+                self.factorial_result_text.insert(tk.END,wrapping)
 
                 
             except ValueError:
-                self.result_text.delete(1.0, tk.END)
+                self.factorial_result_text.delete(1.0, tk.END)
                 messagebox.showerror("Error", "Something went Wrong! Please Try Again!")
             except RecursionError:
-                self.result_text.delete(1.0, tk.END)
+                self.factorial_result_text.delete(1.0, tk.END)
                 messagebox.showerror("Error", "The Number entered exceeded the limit of the recursion depth in Python (1000).\nPlease Enter a Smaller Number!")
         #Submit Button
         self.create_button("Calculate Factorial", 1,4,lambda: show_factorial_result(), "lightgrey", self.factorial_calc_frame)
@@ -398,8 +398,8 @@ class GUI:
         self.user_search_entry=self.create_entry(1,3,self.search_frame)
         
         #Initialising Scrolled Text Box
-        self.result_text=scrolledtext.ScrolledText(self.search_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
-        self.result_text.grid(row=5, column=1, padx=10, pady=10)
+        self.search_result_text=scrolledtext.ScrolledText(self.search_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.search_result_text.grid(row=5, column=1, padx=10, pady=10)
 
         #Showing Result
         def show_search_result():
@@ -409,8 +409,8 @@ class GUI:
             output=search.calculate_statistics(user_array)
             
             #Adds results to the scrollable text box
-            self.result_text.configure(state="normal")
-            self.result_text.delete(1.0, tk.END)
+            self.search_result_text.configure(state="normal")
+            self.search_result_text.delete(1.0, tk.END)
 
             format_output=  (
                 f"""Smallest Value: {output[0]}
@@ -420,8 +420,8 @@ Median: {output[3]}
 1st Interquartile Range: {output[4]}
 3rd Interquartile Range: {output[5]}""")
 
-            self.result_text.insert(tk.END, format_output)
-            self.result_text.configure(state="disabled")
+            self.search_result_text.insert(tk.END, format_output)
+            self.search_result_text.configure(state="disabled")
             
         #Submit Button
         self.create_button("Find Statistics of Array", 1,4,lambda: show_search_result(), "lightgrey", self.search_frame)
