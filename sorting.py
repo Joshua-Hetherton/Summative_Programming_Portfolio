@@ -10,13 +10,13 @@ def bubble_sort(given_array,Ascending=True):
         for j in range(0, array_length-i-1):
             if Ascending:
                 if given_array[j] > given_array[j+1]:
-                    given_array[i], given_array[j+1]=given_array[j+1],given_array[i]
+                    given_array[j], given_array[j+1]=given_array[j+1],given_array[j]
                 
             else:
                if given_array[j] < given_array[j+1]:
-                    given_array[i], given_array[j+1]=given_array[j+1],given_array[i] 
+                    given_array[j], given_array[j+1]=given_array[j+1],given_array[j] 
     
-    
+
 
     return given_array
 
