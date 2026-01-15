@@ -284,6 +284,40 @@ class GUI:
         
         :param self: Description
         """
+        self.create_label("Merge Sort Algorithm",1,0 ,self.brute_force_frame, font_size=16)
+        self.create_label("An implementation of the merge sort that using divide and conquer to sort the array given", 1,1, self.brute_force_frame)
+
+        self.create_label("Enter an array of numbers to be sorted, seperated by commas: ", 1,2, self.brute_force_frame)
+        self.brute_force_user_entry=self.create_entry(1, 3, self.brute_force_frame)
+
+        brute_force_ordering_dropdown_box=ttk.Combobox(self.brute_force_frame, values=["Ascending", "Descending"])
+        brute_force_ordering_dropdown_box.current(0)
+        brute_force_ordering_dropdown_box.configure(state="readonly")
+        brute_force_ordering_dropdown_box.grid(row=4,column=1)
+
+        self.brute_force_result_text=scrolledtext.ScrolledText(self.brute_force_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.brute_force_result_text.grid(row=6, column=1, padx=10, pady=10)
+
+        def show_brute_force_results():
+            user_input=self.brute_force_user_entry.get().split(",")
+            user_input=[int(user_int.strip()) for user_int in user_input]
+            if brute_force_ordering_dropdown_box.get()=="Ascending":
+                Ascending=True
+            else:
+                Ascending=False
+            
+            sorted_array=brute_force_merge.merge_sort(user_input,Ascending=Ascending)
+
+            #Displaying the result on the Scrolled Text box
+            self.brute_force_result_text.configure(state="normal")
+            self.brute_force_result_text.delete(1.0, tk.END)
+            format_array= ", ".join([str(i) for i in sorted_array])
+            self.brute_force_result_text.insert( tk.END, format_array)
+            self.brute_force_result_text.configure( state="disabled")
+
+        #Submit Entry Button
+        self.create_button("Sort Array", 1,5, lambda: show_brute_force_results(), "lightgrey", self.brute_force_frame)
+
         pass
 
     ##Randomised
