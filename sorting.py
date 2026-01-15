@@ -4,7 +4,20 @@ User should be able to specify Ascending/Descending, default sort if not specifi
 """
 
 def bubble_sort(given_array,Ascending=True):
-    given_array.sort()
+    array_length= len(given_array)
+
+    for i in range(array_length):
+        for j in range(0, array_length-i-1):
+            if Ascending:
+                if given_array[j] > given_array[j+1]:
+                    given_array[i], given_array[j+1]=given_array[j+1],given_array[i]
+                
+            else:
+               if given_array[j] < given_array[j+1]:
+                    given_array[i], given_array[j+1]=given_array[j+1],given_array[i] 
+    
+    
+
     return given_array
 
 def selection_sort(given_array,Ascending=True):
