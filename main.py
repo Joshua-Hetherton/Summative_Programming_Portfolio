@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import scrolledtext, messagebox
+from tkinter import scrolledtext, messagebox, ttk
 
 import rsa_encryption
 import nth_fib
@@ -225,6 +225,56 @@ class GUI:
         
         :param self: Description
         """
+        self.create_label("Sorting Algorithms",1,0 ,self.sorting_frame, font_size=16)
+        self.create_label("Select the sorting algorithm from the dropdown box below,input the numbers you would like sorted,\nand choose how you want them ordered",1,1,self.sorting_frame)
+
+        #Dropdown Box containing the 2 sorting algorithms implemented
+        algorithm_dropdown_box=ttk.Combobox(self.sorting_frame, values=["Bubble Sort", "Selection Sort"])
+        algorithm_dropdown_box.current(0)
+        algorithm_dropdown_box.configure(state="readonly")
+        algorithm_dropdown_box.grid(row=2,column=1)
+
+        ordering_dropdown_box=ttk.Combobox(self.sorting_frame, values=["Ascending", "Descending"])
+        ordering_dropdown_box.current(0)
+        ordering_dropdown_box.configure(state="readonly")
+        ordering_dropdown_box.grid(row=3,column=1)
+
+        #The users array input entry
+        self.create_label("Enter the numbers to be sorted, seperated by commas: ",1,4,self.sorting_frame)
+        self.sorting_user_entry=self.create_entry(1,5,self.sorting_frame)
+        
+        #Initalising the Ouput, a scrolled text box
+        self.sorting_result_text=scrolledtext.ScrolledText(self.sorting_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.sorting_result_text.grid(row=7, column=1, padx=10, pady=10)
+
+        def show_sorting_result():
+            user_algorithm=algorithm_dropdown_box.get()
+            user_input=self.sorting_user_entry.get().split(",")
+            user_input=[int(user_int.strip()) for user_int in user_input]
+            if ordering_dropdown_box.get()=="Ascending":
+                Ascending=True
+            else:
+                Ascending=False
+
+            if user_algorithm == "Bubble Sort":
+                sorted_array=sorting.bubble_sort(user_input,Ascending=Ascending)
+            elif user_algorithm == "Selection Sort":
+                sorted_array= sorting.selection_sort(user_input,Ascending=Ascending)
+            
+            print(sorted_array)
+            #Displaying the result on the Scrolled Text box
+            self.sorting_result_text.configure(state="normal")
+            self.sorting_result_text.delete(1.0, tk.END)
+            format_array= ", ".join([str(i) for i in sorted_array])
+            self.sorting_result_text.insert( tk.END, format_array)
+            self.sorting_result_text.configure( state="disabled")
+        
+        #Submit Entry Button
+        self.create_button("Sort Array", 1,6, lambda: show_sorting_result(), "lightgrey", self.sorting_frame)
+
+
+            
+
         pass
 
     ##Brute Force
@@ -287,9 +337,6 @@ class GUI:
         #Revert to Original Deck
         self.create_button("Revert to Original Deck", 2, 3, lambda: self.show_deck(cards), "lightgrey", self.random_deck_frame)
 
-
-
-
     def factorial_calculator_gui(self):
         """
         The specific GUI for the Factorial Calculator Algorithm
@@ -337,7 +384,6 @@ class GUI:
         #Submit Button
         self.create_button("Calculate Factorial", 1,4,lambda: show_factorial_result(), "lightgrey", self.factorial_calc_frame)
         
-
     ##Search
     def search_gui(self):
         """
