@@ -32,6 +32,12 @@ def palindrome_substrings_count(input_str):
         if start+1==end:
             return input_str[start]==input_str[end]
         
+        #Checks more than two characters
+        if input_str[start]==input_str[end]:
+            memory[start,end]= is_palindrome(start+1,end-1)
+            return memory[start,end]
+        
+        return False
 
     #Checks for all possible substrings
     for i in range(len_str):
