@@ -51,7 +51,7 @@ def merge_sort(given_array, Ascending=True):
     recursive_left = merge_sort(left_array, Ascending)
     recursive_right = merge_sort(right_array, Ascending)
 
-    return combine_arrays(recursive_left, recursive_right)
+    return combine_arrays(recursive_left, recursive_right, Ascending)
 
     
     
