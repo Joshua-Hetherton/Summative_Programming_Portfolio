@@ -156,8 +156,4 @@ def decryption(cipher_text,d, n):
         plaintext.append(chr(plaintext_char))
 
     return "".join(plaintext)
-def rsa_algorithm():
-    """
-    Docstring for rsa_algorithm
-    """
-    pass
+

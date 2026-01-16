@@ -207,7 +207,57 @@ class GUI:
         Docstring for rsa_encryption_gui
 
         """
-        pass
+        self.create_label("RSA Encryption Algorithm", 1, 0, self.rsa_frame, font_size=16)
+        self.create_label("Encrypt a message using RSA. You may input your own primes for your keys, or let the system automatically assign them", 1, 1, self.rsa_frame)
+        
+        self.create_label("Enter Prime q and p (Leave blank for system assigned primes). Integers Only: ", 1,2, self.rsa_frame)
+        self.prime_q_entry=self.create_entry(1,3, self.rsa_frame)
+        self.prime_p_entry=self.create_entry(1,4, self.rsa_frame)
+
+        self.create_label("Enter your Message:", 1, 5, self.rsa_frame)
+        self.user_giventext=scrolledtext.ScrolledText(self.rsa_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
+        self.user_giventext.grid(row=6, column=1, padx=10, pady=10)
+
+        self.create_label("Encrypted/Decrypted Message:",1,7, self.rsa_frame)
+        self.output_text=scrolledtext.ScrolledText(self.rsa_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
+        self.output_text.grid(row=8, column=1, padx=10, pady=10)
+
+        def rsa_encrypt():
+            """
+            Docstring for rsa_encryption
+            """
+            try:
+                user_p= int(self.prime_p_entry.get())
+                user_q= int(self.prime_q_entry.get())
+                if user_q == None or user_p== None:
+                    user_p=0
+                    user_q=0
+                    messagebox.showinfo("Info", "System allocated Primes are being used")
+                user_message=self.user_giventext.get(1.0, tk.END)
+                encrypted_message=rsa_encryption.encryption(user_message, user_p, user_q)
+
+                self.output_text.configure(state="normal")
+                self.output_text.delete(1.0, tk.END)
+                self.output_text.insert(tk.END, encrypted_message)
+                self.output_text.configure(state="disabled")
+
+            # except ValueError:
+                
+            #     messagebox.showerror("Error Occured", "Please Ensure that the Primes are Integers")
+
+            except Exception as e:
+                print(e)
+        def rsa_decrypt():
+            """
+            Docstring for rsa_decrypt
+            """
+            pass
+
+        #Encrypt Button
+        self.create_button("Encrypt Message", 1,9, lambda: rsa_encrypt(), "lightgrey", self.rsa_frame)
+
+        #Decrypt Button
+        self.create_button("Decrypt Message", 1,10, lambda: rsa_decrypt(), "lightgrey", self.rsa_frame)
 
     ##Dynamic Programminga
     def nth_fib_gui(self):
