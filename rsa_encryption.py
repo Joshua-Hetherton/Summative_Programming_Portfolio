@@ -16,15 +16,23 @@ def calculate_modular_inverse(e, phi):
         phi (int): Eulers totient function value
     Returns:
         d (int): The modular invese of e % phi
-    """
-    if not greatest_common_divisor(e, phi) ==1:
-        for d in range(1, phi):
-            if (e*d) % phi==1:
-                return d
-        
-    return -1 # A modular inverse doesnt exist
 
-    pass
+    I used a Extended Euclidean Algorithm to help with this implementation from online, Code was adapated:
+    https://www.geeksforgeeks.org/python/python-program-for-basic-and-extended-euclidean-algorithms-2/
+    """
+    def extended_gcd(a, b):
+        if a==0:
+            return b, 0, 1
+        gcd, x1, y1, =extended_gcd(b % a, a)
+        x= y1- (b//a) *x1
+        y=x1
+        return gcd, x, y
+
+    if greatest_common_divisor(e, phi) !=1:
+        return -1 # A modular inverse doesnt exist
+        
+    gcd, x, y= extended_gcd(e, phi)
+    return x % phi
 
 def is_prime(given_number):
     """
@@ -64,6 +72,11 @@ def key_generation(user_p=0, user_q=0, user_e=65537):
 
     Returns:
         List[bool, int, int, int, int]: A list containing if the keys are valid, the exponent e, n, exponent d, and p & q
+
+    These sites were used to help with the explanation and implementation of this:
+    https://www.geeksforgeeks.org/computer-networks/rsa-algorithm-cryptography/
+    https://www.geeksforgeeks.org/dsa/eulers-totient-function/
+    https://cryptographyacademy.com/rsa/
     """
     #The default values
     exponent_e= 65537 
