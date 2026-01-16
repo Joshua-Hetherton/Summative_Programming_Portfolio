@@ -124,16 +124,16 @@ def calculate_power(integer, exponent, mod):
     
     return result
 
-def encryption(user_message, exponent_e, n):
+def encryption(plaintext, exponent_e, n):
     """
     Docstring for encryption
     
-    :param user_message: Description
+    :param plaintext: Description
     :param exponent_e: Description
     :param n: Description
     """
     cipher_text=[]
-    for char in user_message:
+    for char in plaintext:
         message=ord(char)
         encrypted_char=calculate_power(message, exponent_e, n)
         cipher_text.append(encrypted_char)
@@ -142,13 +142,20 @@ def encryption(user_message, exponent_e, n):
     string_chipher_text= "".join(map(str, cipher_text))
     return string_chipher_text
 
-        
+def decryption(cipher_text,d, n):
+    """
+    Docstring for decryption
     
-    
-    
+    :param cipher_text: Description
+    :param d: Description
+    :param n: Description
+    """
+    plaintext=[]
+    for char in cipher_text:
+        plaintext_char = calculate_power(char, d, n)
+        plaintext.append(chr(plaintext_char))
 
-    pass
-
+    return "".join(plaintext)
 def rsa_algorithm():
     """
     Docstring for rsa_algorithm
