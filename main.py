@@ -473,6 +473,16 @@ Median: {output[3]}
         self.create_label("Palindrome Substring Counter", 1,0, self.palindrome_frame, font_size=16)
         self.create_label("Uses memorisation to count all the Palindrome Substrins in a given string", 1, 1, self.palindrome_frame)
         self.user_palindrome_entry= self.create_entry(1,2,self.palindrome_frame)
+
+        def show_palindrome_results():
+            user_input=self.user_palindrome_entry.get()
+            result=palindrome.palindrome_substrings_count(user_input)
+
+            self.create_label(f"There are {result} Palindrom Substrings in the given string", 1, 4, self.palindrome_frame, font_size=12)
+
+        self.create_button("Count Palindrom Substrings", 1, 3, lambda: show_palindrome_results(), "lightgrey", self.palindrome_frame)
+
+
         pass
     
     
