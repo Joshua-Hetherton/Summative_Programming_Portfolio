@@ -2,3 +2,96 @@
 User should be able to enter a message that they want to Encrypt or Decrypt. 
 They should have the option to use their own keys, if not the system should provide its own.
 """
+from tkinter import messagebox
+def greatest_common_divisor(a,b):
+    return a if b==0 else greatest_common_divisor(b, a%b)
+
+def calculate_modular_inverse(e, phi):
+    """
+    Docstring for calculate_modular_inverse
+    
+    :param e: Description
+    :param phi: Description
+    """
+    pass
+
+def is_prime(given_number):
+    """
+    Docstring for is_prime
+    
+    :param given_number: Description
+    """
+    if given_number <=1:
+        return False
+    
+    if given_number % 2==0 and given_number !=2:
+        return False
+
+    for i in range(3, int(given_number**.5)+1,2):
+        if given_number % i==0:
+            return False
+    
+    return True
+    
+    
+def key_generation(user_p=0, user_q=0, user_e=65537):
+    """
+    This function generates the public and private keys for the RSA algorithm.
+    As well as this, the user will be able to input their own keys if they wish to, and this function will validate them.
+
+    The Key Generation process involes:
+        1. Choosing two distinct (and usally large) prime numbers, p and q.
+        2. Using p & q to computer n= p*q, where n is used in both the public and private keys.
+        3. Computing Eulers totient: phi(n)= (p-1)(q-1)
+        4. Choose an exponent e, such that 1< e < Eulers totient function and GCD(e, Eulers totient function)=1
+        5. Calculate the decrytpion exponent d, such that d*e mod Eulers totient=1
+
+    This Leads the the Public Key= (e,n), and the Private Key= (d,n)
+    Args:
+        user_p (int) | None: The user's chosen prime number (p)
+        user_q (int) | None: The user's chosen prime number (q)
+
+    Returns:
+        List[bool, int, int, int, int]: A list containing if the keys are valid, the exponent e, n, exponent d, and p & q
+    """
+    #The default values
+    exponent_e= 65537 
+    auto_p = 53089
+    auto_q = 599426473 
+
+    #Setting p, q and e from the users input(if selected), otherwise defaults to the set ones
+    p= auto_p if user_p==0 else user_p
+    q=auto_q if user_q==0 else user_q
+
+    #Validating p and q
+    if not (is_prime(p) and is_prime(q) and p!=q):
+        return [False, 0,0, 0, 0]
+    #Calculating n and Eulers totient, which will be used for the prime keys
+    n= p * q
+    euluers_totient=(p-1)(q-1)
+
+    #Making sure that n is a very large number
+    if not n > 100000000:
+        messagebox.showinfo("Key Generation Error", "the product of p and q must be a larger number (n>100,000,000)")
+    else:
+        exponent_e= user_e
+
+    #Validating exponent_e
+    if not (1 < exponent_e < euluers_totient and greatest_common_divisor(exponent_e, euluers_totient)==1):
+        messagebox.showinfo("Key Generation Error", "The chosen exponent e is invalid. For e to be valid, it must be 1< e < eulers totient and GCD=1")
+        return [False, 0, 0, 0, 0, 0]
+    
+    #Calculate d using modulve inversion
+    exponent_d=calculate_modular_inverse(exponent_e, euluers_totient)
+        
+    
+    
+    
+
+    pass
+
+def rsa_algorithm():
+    """
+    Docstring for rsa_algorithm
+    """
+    pass
