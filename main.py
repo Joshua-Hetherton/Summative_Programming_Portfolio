@@ -227,9 +227,9 @@ class GUI:
             Docstring for rsa_encryption
             """
             try:
-                user_p= int(self.prime_p_entry.get())
-                user_q= int(self.prime_q_entry.get())
-                if user_q == None or user_p== None:
+                user_p= self.prime_p_entry.get()
+                user_q= self.prime_q_entry.get()
+                if user_q == "" or user_p== "":
                     user_p=0
                     user_q=0
                     messagebox.showinfo("Info", "System allocated Primes are being used")
