@@ -234,12 +234,21 @@ class GUI:
                     user_q=0
                     messagebox.showinfo("Info", "System allocated Primes are being used")
                 user_message=self.user_giventext.get(1.0, tk.END)
-                encrypted_message=rsa_encryption.encryption(user_message, user_p, user_q)
+                
+                sucess, e, d, n, p, q = rsa_encryption.key_generation(int(user_p), int(user_q))
+                if not sucess:
+                    messagebox.showerror("Error Occurred", "please ensure if any primes are entered, that they are valid")
+                
+                encrypted_message=rsa_encryption.encryption(user_message, e, n)
 
                 self.output_text.configure(state="normal")
                 self.output_text.delete(1.0, tk.END)
                 self.output_text.insert(tk.END, encrypted_message)
                 self.output_text.configure(state="disabled")
+
+                #storing values for decryption
+                self.encryption_values= [d, n, p, q, user_message]
+                
 
             # except ValueError:
                 
