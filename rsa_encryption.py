@@ -8,11 +8,22 @@ def greatest_common_divisor(a,b):
 
 def calculate_modular_inverse(e, phi):
     """
-    Docstring for calculate_modular_inverse
+    Calculates the modular inverse of e % phi
+    d= e*d % phi=1
     
-    :param e: Description
-    :param phi: Description
+    Args:
+        e (int): e is the exponent which is used in the key generation
+        phi (int): Eulers totient function value
+    Returns:
+        d (int): The modular invese of e % phi
     """
+    if not greatest_common_divisor(e, phi) !=1:
+        for d in range(1, phi):
+            if (e*d) % phi==1:
+                return d
+        
+    return -1 # A modular inverse doesnt exist
+
     pass
 
 def is_prime(given_number):
@@ -33,7 +44,7 @@ def is_prime(given_number):
     
     return True
     
-    
+
 def key_generation(user_p=0, user_q=0, user_e=65537):
     """
     This function generates the public and private keys for the RSA algorithm.
@@ -83,6 +94,7 @@ def key_generation(user_p=0, user_q=0, user_e=65537):
     
     #Calculate d using modulve inversion
     exponent_d=calculate_modular_inverse(exponent_e, euluers_totient)
+
         
     
     
