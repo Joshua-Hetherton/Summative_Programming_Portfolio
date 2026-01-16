@@ -216,6 +216,29 @@ class GUI:
         
         :param self: Description
         """
+        self.create_label("Nth Fibonacci",1,0, self.fib_frame, font_size=16)
+        self.create_label("Finds the Nth Fibonacci number using Dynamic Programming", 1,1, self.fib_frame)
+
+        self.create_label("Enter a number to find the Nth Fibonacci of: ", 1,2, self.fib_frame)
+        self.fib_user_entry=self.create_entry(1,3, self.fib_frame)
+        
+        self.fib_result_text=scrolledtext.ScrolledText(self.fib_frame,width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.fib_result_text.grid(row=5, column=1, padx=10, pady=10)
+
+        def show_fib_results():
+            try:
+                user_input=int(self.fib_user_entry.get())
+
+                result=nth_fib.fibonacci(user_input)
+                self.fib_result_text.configure(state="normal")
+                self.fib_result_text.delete(1.0, tk.END)
+                self.fib_result_text.insert(tk.END, f"The {user_input}th Fibonacci number is:\n {result}")
+                self.fib_result_text.configure(state="disabled")
+            except ValueError:
+                self.fib_result_text.delete(1.0, tk.END)
+                messagebox.showerror("Error", "Something went Wrong. Please Try Again")
+
+        self.create_button("Find nth Fibonacci", 1,4, lambda: show_fib_results(), "lightgrey", self.fib_frame)
         pass
 
     ##Sorting
