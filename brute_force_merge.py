@@ -13,7 +13,7 @@ def combine_arrays(left_array, right_array, Ascending):
             if left_array[left_index] <= right_array[right_index]:
                 output.append(left_array[left_index])
                 left_index +=1
-            elif right_array[right_index] <= left_array[left_index]:
+            else:
                 output.append(right_array[right_index])
                 right_index +=1
     else:
@@ -21,7 +21,7 @@ def combine_arrays(left_array, right_array, Ascending):
             if left_array[left_index] >= right_array[right_index]:
                 output.append(left_array[left_index])
                 left_index +=1
-            elif right_array[right_index] >= left_array[left_index]:
+            else:
                 output.append(right_array[right_index])
                 right_index +=1
 
