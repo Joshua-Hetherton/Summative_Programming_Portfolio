@@ -79,7 +79,7 @@ def key_generation(user_p=0, user_q=0, user_e=65537):
         return [False, 0,0, 0, 0]
     #Calculating n and Eulers totient, which will be used for the prime keys
     n= p * q
-    euluers_totient=(p-1)(q-1)
+    euluers_totient=(p-1)*(q-1)
 
     #Making sure that n is a very large number
     if not n > 100000000:
