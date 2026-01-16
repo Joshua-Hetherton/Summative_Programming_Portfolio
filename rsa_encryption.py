@@ -17,7 +17,7 @@ def calculate_modular_inverse(e, phi):
     Returns:
         d (int): The modular invese of e % phi
     """
-    if not greatest_common_divisor(e, phi) !=1:
+    if not greatest_common_divisor(e, phi) ==1:
         for d in range(1, phi):
             if (e*d) % phi==1:
                 return d
