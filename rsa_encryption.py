@@ -103,6 +103,45 @@ def key_generation(user_p=0, user_q=0, user_e=65537):
     
     return [True, exponent_e, n, exponent_d, p, q]
 
+def calculate_power(integer, exponent, mod):
+    """
+    Calculates the power of an integer, if provided with an exponent and mod value.
+    The mod value is used to make sure the integer doesnt become exponentally large, which could crash/freeze the program
+
+    Args:
+        integer (int): The base value (i.e base^exponent)
+        exponent (int): The power value(i.e base^exponent)
+        mod (int): Mod value which keep the integer from being too big
+    Returns:
+        result (int): The power value that was calculated
+    """
+    integer= integer % mod
+    while exponent >0:
+        if exponent % 2 ==1:
+            result= (integer* integer) % mod
+        exponent=exponent //2
+        integer= (integer* integer) % mod
+    
+    return result
+
+def encryption(user_message, exponent_e, n):
+    """
+    Docstring for encryption
+    
+    :param user_message: Description
+    :param exponent_e: Description
+    :param n: Description
+    """
+    cipher_text=[]
+    for char in user_message:
+        message=ord(char)
+        encrypted_char=calculate_power(message, exponent_e, n)
+        cipher_text.append(encrypted_char)
+
+    #Return it as a full string by using the map function to convert each integer to a string, and joining them
+    string_chipher_text= "".join(map(str, cipher_text))
+    return string_chipher_text
+
         
     
     
