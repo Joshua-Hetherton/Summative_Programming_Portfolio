@@ -119,7 +119,7 @@ def calculate_power(integer, exponent, mod):
     integer= integer % mod
     while exponent >0:
         if exponent % 2 ==1:
-            result= (integer* integer) % mod
+            result= (result* integer) % mod
         exponent=exponent //2
         integer= (integer* integer) % mod
     
