@@ -115,6 +115,7 @@ def calculate_power(integer, exponent, mod):
     Returns:
         result (int): The power value that was calculated
     """
+    result=1
     integer= integer % mod
     while exponent >0:
         if exponent % 2 ==1:
