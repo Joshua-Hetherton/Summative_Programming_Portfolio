@@ -95,6 +95,14 @@ def key_generation(user_p=0, user_q=0, user_e=65537):
     #Calculate d using modulve inversion
     exponent_d=calculate_modular_inverse(exponent_e, euluers_totient)
 
+    #Final Validation to make sure d exists. If so, all values are returned to encryption/decryption
+    if exponent_d== -1:
+        messagebox.showinfo("Key Generation Error", "Modular Inverse doestn exist for the chosen e and Eulers totient")
+        return [False, 0, 0, 0, 0, 0]
+    
+    
+    return [True, exponent_e, n, exponent_d, p, q]
+
         
     
     
