@@ -139,9 +139,8 @@ def encryption(plaintext, exponent_e, n):
         encrypted_char=calculate_power(message, exponent_e, n)
         cipher_text.append(encrypted_char)
 
-    #Return it as a full string by using the map function to convert each integer to a string, and joining them
-    string_chipher_text= "".join(map(str, cipher_text))
-    return string_chipher_text
+
+    return cipher_text
 
 def decryption(cipher_text,d, n):
     """
