@@ -46,7 +46,7 @@ Additional Features:
 class PrototypeManager:
     def __init__(self):
         self.prototypes={}
-        self.initialise_engines()
+        self.intialise_engines()
     def intialise_engines(self):
         #Liquid Fuel Rocket Engine
         LF_engine=RocketEngine("LF-1", "Liquid Fuel", 500)
