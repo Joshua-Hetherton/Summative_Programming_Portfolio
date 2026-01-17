@@ -1,11 +1,30 @@
 class MissionState:
+    """
+    The abstract base class for the different states the spacecraft will go through during "the mission".
+    """
     def next_state(self,spacecraft):
+        """
+        This function transitions the spacecraft to the next state.
+
+        """
+
         raise NotImplementedError("Subclasses must be implemented")
+    
     def name(self):
+        """
+        Returns the name of the current state.
+
+        """
+
         raise NotImplementedError("Subclasses must be implemented")
+    
     def description(self):
+        """
+        Returns the current description of the state.
+        
+        """
+
         raise NotImplementedError("Subclasses must be implemented")
-    pass
 
 class PrelaunchState(MissionState):
     def next_state(self,spacecraft):
@@ -67,6 +86,3 @@ class Spacecraft:
     def get_status(self):
         return f"Current State: {self.state.name()} \n Description: {self.get_description()} \n Fuel Level is: {self.get_fuel_level()}%"
     
-
-
-    pass

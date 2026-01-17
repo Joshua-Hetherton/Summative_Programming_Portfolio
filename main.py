@@ -709,6 +709,17 @@ Median: {output[3]}
         self.create_button("Create Engine", 1,8, lambda: create_user_engine(), "lightgrey", self.creational_frame)
     
     def behavioural_gui(self):
+        """
+        This is the Behavioural Design Pattern GUI Implementation.
+        This part acts as the interface between the user and the State Design Pattern.
+        In this scenario, a Spacecraft would be moving through the different stages of a mission launch, going from the launchpad, space and returning to Earth.
+
+        Example:
+            - The Spacecraft starts at the launchpad, and once the rocket lifts off, its state changes from Prelaunch to Inflight(In this case, I labelled it as Launch).
+            - As the Spacecraft ascends, its state changes again, to now Orbiting around Earth. It can no longer be in the Launch state, as its speed is too fast, and is now constantly falling.
+            - Finally, the Spacecraft expends all of its fuel to return home, jettisons the service module, and re-enters the Atmosphere, changing its state to Re-entry.
+        
+        """
         self.create_label("State Behavioural Design Pattern", 1, 0, self.behavioural_frame, font_size=16)
         self.create_label("An implementation of the State Design Pattern using A Spacecraft going through differnt stages of the launch process", 1, 1, self.behavioural_frame)
 
@@ -716,12 +727,21 @@ Median: {output[3]}
         self.behavioural_output_text.grid(row=2, column=1, padx=10, pady=10)
         
         def intialise_spacecraft():
+            """
+            Starts the process of the Spacecraft getting ready to be launched.
+            It creates a new Spacecraft object and displays the current status to the user in the scrollable text box.
+            """
             self.spacecraft= behavioural.Spacecraft()
             self.behavioural_output_text.configure(state="normal")
             self.behavioural_output_text.delete(1.0, tk.END)
             self.behavioural_output_text.insert(tk.END, f"{self.spacecraft.get_status()}")
 
         def proceed_next_state():
+            """
+            For when the user wants to proceed to the next stage of the launch process.
+            It checks if the spacecraft has been initialised, prompting the user to start the launch sequence if it hasnt.
+            It then transitions the spacecraft to the next state, and displays the current status to the user in the text box.
+            """
             if not hasattr(self, "spacecraft"):
                 messagebox.showinfo("Info", "Please start the launch sequence")
             self.spacecraft.transition_to_next_state()
