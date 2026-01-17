@@ -9,6 +9,10 @@ import factorial_calc
 import search
 import palindrome
 
+import behavioural
+import structural
+import creational
+
 def test_brute_force_merge():
     try:
         print("Commencing Merge Sort Tests...")
@@ -115,6 +119,41 @@ def test_sorting():
     except AssertionError:
         print("Sorting Test Failed")
 
+def test_behavioral():
+    try:
+        spacecraft=behavioural.Spacecraft()
+        assert spacecraft.state.name()=="Prelaunch"
+        spacecraft.transition_to_next_state()
+        assert spacecraft.state.name()=="Launch"
+        spacecraft.transition_to_next_state()
+        assert spacecraft.state.name()=="Orbit"
+        spacecraft.transition_to_next_state()
+        assert spacecraft.state.name()=="Re-Entry"
+    except AssertionError:
+        print("Behavioral Design Pattern Test Failed")
+
+def test_structural():
+    try:
+        original_measurement=structural.OriginalMeasurement(10, "feet")
+        adapted_value=structural.MeasurementAdapter.convert_to_meters(original_measurement)
+        assert adapted_value == 3.048
+    except AssertionError:
+        print("Structural Design Pattern Test Failed")
+
+def test_creational():
+    try:
+        prototype_manager=creational.PrototypeManager()
+        engine_types=prototype_manager.get_engine_types()
+        assert "Liquid Fuel Rocket Engine" in engine_types
+        assert "Solid Fuel Rocket Engine" in engine_types
+        custom_engine=prototype_manager.create_custom_engine("Sea Level LF Engine", "Liquid Fuel Rocket Engine", ["Turbo Pump", "Extra Long Nozzle"])
+        assert custom_engine.name=="Sea Level LF Engine"
+        assert custom_engine.fuel_type=="LF-1"
+        assert "Turbo Pump" in custom_engine.features
+        assert "Extra Long Nozzle" in custom_engine.features
+        
+    except AssertionError:
+        print("Creational Design Pattern Test Failed")
 def call_all_tests():
     test_brute_force_merge()
     test_factorial_calc()
@@ -124,6 +163,9 @@ def call_all_tests():
     test_rsa_encryption()
     test_search()
     test_sorting()
+    test_behavioral()
+    test_structural()
+    test_creational()
 
 if __name__ == "__main__":
     call_all_tests()
