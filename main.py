@@ -236,11 +236,6 @@ class GUI:
                 #storing values for decryption
                 self.encryption_values= [d, n, p, q, user_message]
 
-
-            # except ValueError:
-                
-            #     messagebox.showerror("Error Occured", "Please Ensure that the Primes are Integers")
-
             except Exception as e:
                 print(e)
         
@@ -286,6 +281,11 @@ class GUI:
             try:
                 user_d=self.d_entry.get()
                 user_n=self.n_entyry.get()
+                
+                if user_d=="" or user_n=="":
+                    messagebox.showinfo("Info", "Please enter d and n")
+                    return
+
                 #Adds commas between each part of the cipher text
                 cipher_text=self.cipher_text_given.get(1.0, tk.END).replace(" ", ",")
                 decrypted_message=rsa_encryption.decryption(cipher_text, int(user_d), int(user_n))
