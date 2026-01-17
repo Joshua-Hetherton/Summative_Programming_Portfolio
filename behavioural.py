@@ -10,6 +10,7 @@ class MissionState:
 class PrelaunchState(MissionState):
     def next_state(self,spacecraft):
         if spacecraft.get_fuel_level() >=50:
+            spacecraft.fuel=spacecraft.get_fuel_level()-20
             spacecraft.state=LaunchState()
     def name(self):
         return "Prelaunch"
@@ -40,8 +41,9 @@ class OrbitState(MissionState):
 
 class ReEntryState(MissionState):
     def next_state(self,spacecraft):
-        spacecraft.fuel=spacecraft.get_fuel_level()-spacecraft.get_fuel_level()
-        spacecraft.state=PrelaunchState()
+        spacecraft.fuel=0
+
+
     def name(self):
         return "Re-Entry"
     
