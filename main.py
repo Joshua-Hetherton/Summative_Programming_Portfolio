@@ -225,11 +225,11 @@ class GUI:
                     messagebox.showerror("Error Occurred", "please ensure if any primes are entered, that they are valid")
                 
                 encrypted_message=rsa_encryption.encryption(user_message, e, n)
-                encrypted_str=", ".join(map(str, encrypted_message))
+                encrypted_hex=", ".join([hex(num) for num in encrypted_message])
 
                 self.output_text.configure(state="normal")
                 self.output_text.delete(1.0, tk.END)
-                self.output_text.insert(tk.END, encrypted_str)
+                self.output_text.insert(tk.END, encrypted_hex)
                 self.output_text.insert(tk.END, f"\n e:{e}, n:{n}, d:{d}, p:{p}, q:{q}")
                 self.output_text.configure(state="disabled")
 
@@ -291,7 +291,7 @@ class GUI:
                     return
 
                 cipher_text=self.cipher_text_given.get(1.0, tk.END).strip().split(",")
-                cipher_text=[int(i.strip()) for i in cipher_text]
+                cipher_text=[int(i.strip(), 16) for i in cipher_text]
                 decrypted_message=rsa_encryption.decryption(cipher_text, int(user_d), int(user_n))
                 self.cipher_text_given.configure(state="normal")
                 self.cipher_text_given.delete(1.0, tk.END)
