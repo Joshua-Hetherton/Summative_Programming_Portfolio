@@ -26,4 +26,20 @@ class RocketEngine:
         self.features.append(feature)
 
     def list_features(self):
+        return f"""
+Amount of Features: {len(self.features)}
+==========================
+{self.name} has the following Attributes:
+self.engine_type: {self.engine_type}
+self.thrust: {self.thrust} kN
+self.burn_time: {self.burn_time} seconds
+self.specific_impulse: {self.specific_impulse} seconds
+self.fuel_type: {self.fuel_type}
+self.oxidizer_type: {self.oxidizer_type}
+self.mixture_rati: {self.mixture_ratio}
+==========================
+Additional Features:
+{", ".join(self.features)}
+
+"""
         pass
