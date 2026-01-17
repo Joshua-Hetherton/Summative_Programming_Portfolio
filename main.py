@@ -390,6 +390,11 @@ class GUI:
         self.sorting_result_text.grid(row=7, column=1, padx=10, pady=10)
 
         def show_sorting_result():
+            """
+            The interface between the GUI and sorting module.
+            it collects all the users inputs and passes them through the relevant sorting function which was selected.
+            
+            """
             user_algorithm=algorithm_dropdown_box.get()
             user_input=self.sorting_user_entry.get().split(",")
             user_input=[int(user_int.strip()) for user_int in user_input]
