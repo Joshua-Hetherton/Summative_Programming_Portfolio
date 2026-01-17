@@ -291,15 +291,13 @@ class GUI:
                     return
 
                 cipher_text=self.cipher_text_given.get(1.0, tk.END).strip().split(",")
-
-
-
+                cipher_text=[int(i.strip()) for i in cipher_text]
                 decrypted_message=rsa_encryption.decryption(cipher_text, int(user_d), int(user_n))
                 self.cipher_text_given.configure(state="normal")
                 self.cipher_text_given.delete(1.0, tk.END)
                 self.cipher_text_given.insert(tk.END, decrypted_message)
 
-                self.cipher_text_given.configure(state="disabled")
+                
             except Exception as e:
                 print(e)
 
