@@ -703,7 +703,28 @@ Median: {output[3]}
         self.create_button("Create Engine", 1,8, lambda: create_user_engine(), "lightgrey", self.creational_frame)
     
     def behavioural_gui(self):
-        pass
+        self.create_label("State Behavioural Design Pattern", 1, 0, self.behavioural_frame, font_size=16)
+        self.create_label("An implementation of the State Design Pattern using A Spacecraft going through differnt stages of the launch process", 1, 1, self.behavioural_frame)
+
+        self.behavioural_output_text=scrolledtext.ScrolledText(self.behavioural_frame, width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.behavioural_output_text.grid(row=2, column=1, padx=10, pady=10)
+        
+        def intialise_spacecraft():
+            self.spacecraft= behavioural.Spacecraft()
+            self.behavioural_output_text.configure(state="normal")
+            self.behavioural_output_text.delete(1.0, tk.END)
+            self.behavioural_output_text.insert(tk.END, f"{self.spacecraft.get_status()}")
+
+        def proceed_next_state():
+            if not hasattr(self, "spacecraft"):
+                messagebox.showinfo("Info", "Please start the launch sequence")
+            self.spacecraft.transition_to_next_state()
+            self.behavioural_output_text.configure(state="normal")
+            self.behavioural_output_text.delete(1.0, tk.END)
+            self.behavioural_output_text.insert(tk.END, f"{self.spacecraft.get_status()}")
+        
+        self.create_button("Start Launch sequence", 1, 3, lambda: intialise_spacecraft(), "lightgrey", self.behavioural_frame)
+        self.create_button("Proceed to Next State", 1, 4, lambda: proceed_next_state(), "lightgrey", self.behavioural_frame)
 
     def structural_gui(self):
         

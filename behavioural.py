@@ -50,7 +50,7 @@ class ReEntryState(MissionState):
 
 class Spacecraft:
     def __init__(self):
-        self.state=None
+        self.state= PrelaunchState()
         self.fuel=100
     
     def transition_to_next_state(self):
@@ -63,7 +63,7 @@ class Spacecraft:
         return self.state.description()
 
     def get_status(self):
-        return f"Current State: {self.state.name()} \n Description: {self.get_description()} \n Fuel Level is: {self.get_fuel_level()}%"
+        return f"Current State: {self.state} \n Description: {self.get_description()} \n Fuel Level is: {self.get_fuel_level()}%"
     
 
 
