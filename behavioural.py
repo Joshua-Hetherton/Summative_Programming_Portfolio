@@ -8,7 +8,14 @@ class MissionState:
     pass
 
 class PrelaunchState(MissionState):
-    pass
+    def next_state(self,spacecraft):
+        if spacecraft.get_fuel_level() >=50:
+            spacecraft.state=LaunchState()
+    def name(self):
+        return "Prelaunch"
+    
+    def description(self):
+        return "Spacecraft is in a prelaunch state, and is ready for lift-off if fuel levels are sufficient."
 
 class LaunchState(MissionState):
     pass
