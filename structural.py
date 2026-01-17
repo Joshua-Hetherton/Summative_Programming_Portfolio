@@ -55,13 +55,13 @@ class MeasurementAdapter(Measurement):
             return value * 1e9
         
         elif unit=="miles":
-            return value * 0.000621371
+            return value * 1609.34
         
         elif unit=="feet":
-            return value * 3.28084
+            return value * 0.3048
         
         elif unit=="inches":
-            return value * 39.3701
+            return value * 0.0254
     
         else:
             return None
