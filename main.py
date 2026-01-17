@@ -65,13 +65,13 @@ class GUI:
         
         """
         self.configure_grid_layout(self.root, 1, 2)
+
         #Main menu Frame
         self.main_menu_frame=tk.Frame(self.root, bg="white")
 
         #Sidebar Frame
-        self.sidebar_frame=tk.Frame(self.root, bg="lightgrey",width=200)
-        self.sidebar_frame.grid(row=0, column=0, sticky="ns")
-        self.sidebar_frame.grid_propagate(False)
+        self.sidebar_frame=tk.Frame(self.root, bg="lightgrey")
+        self.sidebar_frame.grid(row=0, column=0, sticky="nsew")
 
 
         #Algorithm Frames
