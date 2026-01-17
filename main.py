@@ -393,7 +393,7 @@ class GUI:
             """
             The interface between the GUI and sorting module.
             it collects all the users inputs and passes them through the relevant sorting function which was selected.
-            
+
             """
             user_algorithm=algorithm_dropdown_box.get()
             user_input=self.sorting_user_entry.get().split(",")
@@ -427,9 +427,9 @@ class GUI:
     ##Brute Force
     def brute_force_gui(self):
         """
-        Docstring for brute_force_gui
-        
-        :param self: Description
+        This is the GUI implementation for the Merge sort algorithm that uses divide and conquer.
+        This GUI displays the entry boxes, drop down boxes and the scrollable text needed to display and collect results from the user.
+
         """
         self.create_label("Merge Sort Algorithm",1,0 ,self.brute_force_frame, font_size=16)
         self.create_label("An implementation of the merge sort that using divide and conquer to sort the array given", 1,1, self.brute_force_frame)

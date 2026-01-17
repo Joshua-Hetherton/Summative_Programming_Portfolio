@@ -2,8 +2,13 @@ def combine_arrays(left_array, right_array, Ascending):
     """
     Rejoins the branches of the array, now in a sorted order.
     
-    left_array (List[int]): The left branch of the array
-    right_array (List[int]): The right branch of the aray
+    Args:
+        left_array (List[int]): The left branch of the array
+        right_array (List[int]): The right branch of the aray
+        Ascending (bool): Whether the array is sorted in ascending or descending order
+        
+    Returns:
+        List[int]: The combined sorted array
     """
     output=[]
     left_index=0
@@ -36,8 +41,13 @@ def merge_sort(given_array, Ascending=True):
     """
     Sorts a given array using the merge sort algorithm.
     The array is split in half recursively until the length of an array is 1. It is then recombined in a sorted order.
-    
-    given_array (List[int]): Description
+
+    Args:
+        given_array (List[int]): The array to be sorted
+        Ascending (bool): Whether the array is sorted in ascending or descending order
+    Returns:
+        List[int]: The sorted array
+        
     """
     if len(given_array)<=1:
         return given_array
