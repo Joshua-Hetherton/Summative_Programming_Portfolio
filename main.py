@@ -753,6 +753,12 @@ Median: {output[3]}
         self.create_button("Proceed to Next State", 1, 4, lambda: proceed_next_state(), "lightgrey", self.behavioural_frame)
 
     def structural_gui(self):
+        """
+        Structural Design Pattern GUI Implementation.
+        This part acts as the interface between a user and an Adapter.
+        In this scenario, the users input of measurement cannot be used, and so an Adapater needs to be used.
+        The adpater takes the current unit and measurment, and converts it to meters
+        """
         
         self.create_label("Adapter Structural Design Pattern", 1,0, self.structural_frame, font_size=16)
         self.create_label("Uses an Adapter to allow incompatible measurement units to work together, by adapting them all to meters", 1, 1, self.structural_frame)
@@ -771,6 +777,10 @@ Median: {output[3]}
 
 
         def show_unit_results():
+            """
+            The intermediary function between the GUI and the adapter module.
+            It collects the users input as the measurement value and unit, before passing them through the OriginalMeasurement class to create an object.
+            """
             try:
                 user_value=float(self.user_measurement_entry.get())
                 user_unit=self.measurement_unit_selection.get()
