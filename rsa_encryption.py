@@ -186,6 +186,9 @@ def decryption(cipher_text,d, n):
         cipher_text (List[int]): The encrypted message represented as a list of integers
         d (int): The private key's exponent value
         n (int): The private key's n value
+
+    Returns:
+        str: The decrypted plaintext message
     """
     plaintext=[]
     for char in cipher_text:
