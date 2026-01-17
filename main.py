@@ -60,6 +60,9 @@ class GUI:
         self.factorial_calculator_gui()
         self.search_gui()
         self.palindrome_gui()
+        self.creational_gui()
+        #self.structural_gui()
+        # self.behavioural_gui()
 
 
 
@@ -89,11 +92,16 @@ class GUI:
         self.search_frame= tk.Frame(self.root, bg="lightblue", width=880, height= 720)
         self.palindrome_frame= tk.Frame(self.root, bg="lightblue", width=880, height= 720)
 
+        self.creational_frame=tk.Frame(self.root, bg="lightblue", width=880, height=720)
+        self.structural_frame=tk.Frame(self.root, bg="lightblue", width=880, height=720)
+        self.behavioural_frame=tk.Frame(self.root, bg="lightblue", width=880, height=720)
+
     
         
         #Setting frame positions
         for frame in (self.main_menu_frame, self.rsa_frame, self.fib_frame, self.sorting_frame, self.brute_force_frame,
-                      self.random_deck_frame, self.factorial_calc_frame, self.search_frame, self.palindrome_frame):
+                      self.random_deck_frame, self.factorial_calc_frame, self.search_frame, self.palindrome_frame, self.creational_frame,
+                      self.structural_frame, self.behavioural_frame):
             frame.grid(row=0, column=1, sticky="nsew")
         
         self.root.grid_columnconfigure(1, weight=1)
@@ -197,7 +205,11 @@ class GUI:
         self.create_button("Randomised Deck", 0, 5 , lambda: self.show_frame(self.random_deck_frame), "lightgrey", parent, sticky="w")
         self.create_button("Factorial", 0, 6 , lambda: self.show_frame(self.factorial_calc_frame), "lightgrey", parent, sticky="w")
         self.create_button("Search", 0, 7 , lambda: self.show_frame(self.search_frame), "lightgrey", parent, sticky="w")
+
         self.create_button("Palindrome", 0, 8 , lambda: self.show_frame(self.palindrome_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Structural Patterns", 0, 9 , lambda: self.show_frame(self.structural_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Behavioural Patterns", 0, 10 , lambda: self.show_frame(self.behavioural_frame), "lightgrey", parent, sticky="w")
+        self.create_button("Creational Patterns", 0, 11 , lambda: self.show_frame(self.creational_frame), "lightgrey", parent, sticky="w")
 
 
     """
@@ -638,8 +650,36 @@ Median: {output[3]}
 
         pass
     
-    def prototype_pattern_gui(self):
+    def creational_gui(self):
+        """
+        Docstring for prototype_pattern_gui
+        
+        :param self: Description
+        """
+
+        self.create_label("Prototype Design Pattern", 1,0, self.creational_frame, font_size=16)
+        self.create_label("An implementation of the prototype deisgn pattern using RocketEngines", 1, 1, self.creational_frame)
+
+        self.prototype_manager= creational.PrototypeManager()
+
+        #DropDown box for engine type
+        engine_type=ttk.Combobox(self.creational_frame, values=["Liquid Fuel Engine", "Solid Fuel Engine"])
+        engine_type.current(0).configure(state="readonly")
+        engine_type.grid(row=2,column=1)
+
+        self.create_label("Enter Engine Name:", 1, 2, self.creational_frame)
+        self.enginer_name_entry=self.create_entry(1,3, self.creational_frame)
+
+        self.create_label("Enter Additional Features(seperated by commas):", 1, 4, self.creational_frame)
+
+
+        pass
     
+    def behavioural_gui():
+        pass
+
+    def structural_gui():
+        pass
 
 def main():
     root=tk.Tk()
