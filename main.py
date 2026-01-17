@@ -652,9 +652,15 @@ Median: {output[3]}
     
     def creational_gui(self):
         """
-        Docstring for prototype_pattern_gui
-        
-        :param self: Description
+        The Creational Design pattern GUI Implementation.
+        This acts as the interface between the user and the Prototype Design Class.
+        It collects the users inputs, and passes them through the Prototype Manager to quickly create custom rocket engines based on pre-existing ones.
+
+        Example:
+            Prototyping of Rocket Engines allows us to quickly iterate through Vacuum and Sea level engines:
+                - In this case, the Sea level engine can have a feature where their nozzle length is adjusted to work well in the atmosphere
+                - Or, the Vacuum Engine can have a feature where it has an extended nozzle for a better performance in space.
+
         """
 
         self.create_label("Prototype Creational Design Pattern", 1,0, self.creational_frame, font_size=16)

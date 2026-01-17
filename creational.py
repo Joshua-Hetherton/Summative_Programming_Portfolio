@@ -4,6 +4,11 @@ Prototyping Rocket Engines
 """
 import copy
 class RocketEngine:
+    """
+    This class is the basis for the Prototype Design Pattern.
+    It represents a default rocket engine, which can contain various features and attributes 
+    that can later be cloned to create new rocket engines with similar properties
+    """
     def __init__(self, name, engine_type,thrust):
         self.name=name
         self.engine_type=engine_type
@@ -20,12 +25,31 @@ class RocketEngine:
         pass
     
     def clone(self):
+        """
+        Clones the given Object (in this case Rocket Engine), and a copy is returned.
+
+        Returns:
+            RocketEngine: A copy of the current RocketEngine Object
+        """
         return copy.deepcopy(self)
 
     def add_features(self, feature):
+        """
+        Adds a new feature to the Rocket Engine.
+
+        Args:
+            feature (str): Description of the feature to be added
+        """
+
         self.features.append(feature)
 
     def list_features(self):
+        """
+        Lists all the features of the Rocket Engine.
+        
+        Returns:
+            str: A formatted string that lists all the features of the Rocket Engine.
+        """
         return f"""
 Amount of Features: {len(self.features)}
 ==========================
@@ -44,10 +68,19 @@ Additional Features:
 """
 
 class PrototypeManager:
+    """
+    The main class which manages all the prototypes of the rocket Engines.
+    It initialises a set of the default Rocket Engines, and allows for cloning and creating of any custom engines.
+    """
     def __init__(self):
         self.prototypes={}
         self.initialise_engines()
+
     def initialise_engines(self):
+        """
+        Provides a default set of Rocket Engines to be used for Prototyping.
+        Currently, it Include both Liquid Fuel and Solid Fuel Rocket Engines(Also known as SRB's if attached radially/to the side).
+        """
         #Liquid Fuel Rocket Engine
         LF_engine=RocketEngine("LF-1", "Liquid Fuel", 500)
         LF_engine.burn_time=230
@@ -67,15 +100,41 @@ class PrototypeManager:
         self.prototypes["Solid Fuel Rocket Engine"]=SRB_engine
 
     def get_engine_types(self):
+        """
+        Lists all available engine types for the Prototype Manager.
+        
+        Returns:
+            list: A list of all available engine types.
+        """
         return list(self.prototypes.keys())
     
     def create_engine(self, engine_type):
+        """
+        Creates a clone of a given engine type.
+        This then allows it to be customised further.
+
+        Args:
+            engine_type (str): The type of engine to clone.
+        Returns:
+            RocketEngine | None: A cloned RocketEngine Objects based on the engine type provided, or None if the engine doesnt exist
+        """
+
         if engine_type in self.prototypes:
             return self.prototypes[engine_type].clone()
         else:
             return None
         
     def create_custom_engine(self, new_engine, engine_type, features):
+        """
+        Creates a custom Rocket Engine given all the facts provided by the user.
+        
+        Args:
+            new_engine (str): The name of the new custom engine.
+            engine_type (str): The type of engine to clone.
+            features (list): A list of features to be added to the new engine.
+        Returns:
+            RocketEngine | None: A customised RocketEngine Object based on the engine type provided, or None if the engine doesnt exist
+        """
         engine=self.create_engine(engine_type)
         if engine is not None:
             engine.name=new_engine
