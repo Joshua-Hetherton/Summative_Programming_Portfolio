@@ -4,6 +4,18 @@ User should be able to specify Ascending/Descending, default sort if not specifi
 """
 
 def bubble_sort(given_array,Ascending=True):
+    """
+    The bubble sort function sorts the array using the bubble sort algorithm.
+    It works by iterating through the array, comparing the adjacent elements and swapping them if they are in the wrong order.
+    The process is repeated until the array is sorted.
+    
+    Args:
+        given_array (List[int]): The array to be sorted
+        Ascending (bool): If True, sort in ascending order, else descending order
+
+    Returns:
+        List[int]: The sorted array
+    """
     array_length= len(given_array)
 
     for i in range(array_length):
@@ -21,6 +33,17 @@ def bubble_sort(given_array,Ascending=True):
     return given_array
 
 def selection_sort(given_array,Ascending=True):
+    """
+    The selection sort function that sorts the array with the selection sort algorithm.
+    It works by divding the array into a sorted and usorted list, and repeatedly selects the minimum and maximum element that is unsorted.
+    This element is then swapped with the first unsorted element, and the process is repeated until sorted.
+    
+    Args:
+        given_array (List[int]): The array to be sorted
+        Ascending (bool): If True, sort in ascending order, else descending order
+    Returns:
+        List[int]: The sorted array
+    """
 
     array_length= len(given_array)
 
