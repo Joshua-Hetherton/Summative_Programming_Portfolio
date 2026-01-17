@@ -518,6 +518,7 @@ class GUI:
         #Revert to Original Deck
         self.create_button("Revert to Original Deck", 2, 3, lambda: self.show_deck(cards), "lightgrey", self.random_deck_frame)
 
+    #Factorial Calculator
     def factorial_calculator_gui(self):
         """
         The specific GUI for the Factorial Calculator Algorithm
