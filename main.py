@@ -286,8 +286,14 @@ class GUI:
                     messagebox.showinfo("Info", "Please enter d and n")
                     return
 
-                #Adds commas between each part of the cipher text
-                cipher_text=self.cipher_text_given.get(1.0, tk.END).replace(" ", ",")
+                if self.cipher_text_given.get(1.0,tk.END).strip()=="":
+                    messagebox.showinfo("Info", "Please enter the cipher text")
+                    return
+
+                cipher_text=self.cipher_text_given.get(1.0, tk.END).strip().split(",")
+
+
+
                 decrypted_message=rsa_encryption.decryption(cipher_text, int(user_d), int(user_n))
                 self.cipher_text_given.configure(state="normal")
                 self.cipher_text_given.delete(1.0, tk.END)
