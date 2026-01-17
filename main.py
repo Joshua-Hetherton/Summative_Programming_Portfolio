@@ -668,12 +668,38 @@ Median: {output[3]}
         engine_type.grid(row=2,column=1)
 
         self.create_label("Enter Engine Name:", 1, 2, self.creational_frame)
-        self.enginer_name_entry=self.create_entry(1,3, self.creational_frame)
+        self.engine_name_entry=self.create_entry(1,3, self.creational_frame)
 
         self.create_label("Enter Additional Features(seperated by commas):", 1, 4, self.creational_frame)
+        self.engine_features_entry=self.create_entry(1,5, self.creational_frame)
 
+        self.creational_output_text=scrolledtext.ScrolledText(self.creational_frame, width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
+        self.creational_output_text.grid(row=7, column=1, padx=10, pady=10)
 
-        pass
+        def create_user_engine():
+            try:
+                base_engine=engine_type.get()
+                engine_name=self.engine_name_entry.get()
+                engine_features=self.engine_features_entry.get().split(",")
+                engine_features=[feature.strip() for feature in engine_features]
+                
+                if engine_name=="" or engine_name==" ":
+                    messagebox.showinfo("Info", "Please enter a valid name")
+                    return
+                
+                engine=self.prototype_manager.create_custom_engine(engine_name, base_engine, engine_features)
+                
+                if engine == None:
+                    messagebox.showerror("Error", "Something went wrong. Please try again")
+                    return
+
+                self.creational_output_text.configure(state="normal")
+                self.creational_output_text.delete(1.0, tk.END)
+                self.creational_output_text.insert(tk.END, f"Engine Name: {engine.name}\nEngine Type: {engine.engine_type}\nFeatures: {', '.join(engine.features)}")
+                self.creational_output_text.configure(state="disabled")
+            except Exception as e:
+                print(e)
+        self.create_button("Create Engine", 1,6, lambda: create_user_engine(), "lightgrey", self.creational_frame)
     
     def behavioural_gui():
         pass
