@@ -10,6 +10,11 @@ import factorial_calc
 import search
 import palindrome
 
+#Design Patterns
+import creational
+import behavioural
+import structural
+
 
 
 
@@ -633,6 +638,7 @@ Median: {output[3]}
 
         pass
     
+    def prototype_pattern_gui(self):
     
 
 def main():
