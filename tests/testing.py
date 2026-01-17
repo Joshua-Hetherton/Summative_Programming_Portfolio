@@ -1,13 +1,13 @@
 import time
 
-from brute_force_merge import *
-from factorial_calc import *
-from nth_fib import *
-from palindrome import *
-from random_deck import *
-from rsa_encryption import *
-from search import *
-from sorting import *
+import rsa_encryption
+import nth_fib
+import sorting
+import brute_force_merge
+import random_deck
+import factorial_calc
+import search
+import palindrome
 
 def test_brute_force_merge():
     print("Commencing Merge Sort Tests...")
@@ -16,6 +16,7 @@ def test_brute_force_merge():
 
 def test_factorial_calc():
     print("Commencing Factorial Tests...")
+
     print("+==End of Factorial Tests==+")
 
 def test_nth_fib():
