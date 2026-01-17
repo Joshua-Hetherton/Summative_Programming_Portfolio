@@ -22,8 +22,8 @@ class RocketEngine:
     def clone(self):
         return copy.deepcopy(self)
 
-    def add_features(self):
-        pass
+    def add_features(self, feature):
+        self.features.append(feature)
 
     def list_features(self):
         pass
