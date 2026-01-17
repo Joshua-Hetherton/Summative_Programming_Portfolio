@@ -21,6 +21,15 @@ def calculate_modular_inverse(e, phi):
     https://www.geeksforgeeks.org/python/python-program-for-basic-and-extended-euclidean-algorithms-2/
     """
     def extended_gcd(a, b):
+        """
+        The extended euclidean algorithm is the more efficient version of the euclidean gcd algorithm.
+        It finds the integers x and y, such that: ax+by=gcd(a,b)
+        This is useful for finding the moduler inverse, as the equation can be rearranged to find d.
+
+        
+        a (int): The a number in the gcd calculation
+        b (int): The b number in the gcd calculation
+        """
         if a==0:
             return b, 0, 1
         gcd, x1, y1, =extended_gcd(b % a, a)
@@ -36,10 +45,15 @@ def calculate_modular_inverse(e, phi):
 
 def is_prime(given_number):
     """
-    Docstring for is_prime
+    This function checks if a given_number is a prime or not
     
-    :param given_number: Description
+    Args:
+        given_number (int): The number to be checked if it is process_time
+
+    Returns:
+        bool: True if the number is prime, Otherwise false
     """
+
     if given_number <=1:
         return False
     
@@ -137,11 +151,20 @@ def calculate_power(integer, exponent, mod):
 
 def encryption(plaintext, exponent_e, n):
     """
-    Docstring for encryption
+    Encrypts the plaintext message using the RSA algorithm.
+    To do this, each character in the plaintext is converted into ASCII using the ord() function.
+    The ASCII value is then encrypted using the formula: cipher_char= (message^e) mod n
+    These encrypted characters are then stored in a list, which is then returned as the cipher text.
     
-    :param plaintext: Description
-    :param exponent_e: Description
-    :param n: Description
+    Args:
+        plaintext (str): The message to be encrypted
+        exponent_e (int): The public key's exponent value
+        n (int): The Public key's n value
+    
+    Returns:
+        List[int]: A list of intergers which represent the encrypted cipher text. 
+        This is later converted to hexadecimal for readability in the main program.
+
     """
     cipher_text=[]
     for char in plaintext:
@@ -154,11 +177,15 @@ def encryption(plaintext, exponent_e, n):
 
 def decryption(cipher_text,d, n):
     """
-    Docstring for decryption
+    Decrypts the cipher text using the RSA algorithm.
+    To do this, each integer in the cipher text is decrypted such that: plaintext_char= (cipher_chard^d) mod n.
+    The reason mod n is used is because during encryption, the cipher text was calculated with mod n, so it must be reveresed the same way.
+    The decrypted integer is then converted back into characters using the chr() function.
     
-    :param cipher_text: Description
-    :param d: Description
-    :param n: Description
+    Args:
+        cipher_text (List[int]): The encrypted message represented as a list of integers
+        d (int): The private key's exponent value
+        n (int): The private key's n value
     """
     plaintext=[]
     for char in cipher_text:

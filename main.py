@@ -204,12 +204,20 @@ class GUI:
     ##RSA
     def rsa_encryption_gui(self):
         """
-        Docstring for rsa_encryption_gui
+        The GUI that handles the RSA encryption and decryption process
+        It uses a scrollable frame to allow for the the larger amount of content needed for this algorithm
 
         """
         def rsa_encrypt():
             """
-            Docstring for rsa_encryption
+            This function handles the rsa_encryption module to encrypt the user's message
+            It retrieves all fields from the user, from both entry boxes and scrollable text boxes
+            The scrollable text boxes allow the user to inputer longer messages without the window expanding, or losing track of what they have previously written
+
+            Once these fields are collected, they are first validated, before being passed through the rsa_encryption.key_generation function to get the keys needed for the encryption
+            The message is then encrypted using the rsa_encryption.encryption function, and the cipher text is then displayed in a hexidecimal format for the user.
+            All Keys and values used are displayed below the cipher text for the user to using during the decryption process.
+            
             """
             try:
                 user_p= self.prime_p_entry.get()
@@ -276,7 +284,9 @@ class GUI:
 
         def rsa_decrypt():
             """
-            Docstring for rsa_decrypt
+            This function handles the rsa_encryption's decryption function. By taking the users inputted d and n values, as well as the ciphertext to be decrypted.
+            It first validates that all fields have been filled, before passing them through the rsa_encryption.decryption function.
+            The decrypted message is then displayed within the same scrollable text box that the cipher was displayed in.
             """
             try:
                 user_d=self.d_entry.get()
@@ -315,22 +325,6 @@ class GUI:
         self.cipher_text_given.grid(row=18, column=1, padx=10, pady=10)
 
         self.create_button("Decrypt Message", 1, 19, lambda:rsa_decrypt(), "lightgrey", inner_scrollable_frame)
-
-
-        
-
-
-
-        
-
-
-
-
-
-        
-
-        #Encrypt Button
-
 
     ##Dynamic Programminga
     def nth_fib_gui(self):
