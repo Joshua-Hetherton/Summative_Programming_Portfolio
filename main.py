@@ -719,6 +719,10 @@ Median: {output[3]}
         self.measurement_unit_selection.configure(state="readonly")
         self.measurement_unit_selection.grid(row=5, column=1)
 
+        self.structural_output_text=scrolledtext.ScrolledText(self.structural_frame, width=50, height=5, wrap=tk.WORD, font=("Arial", 12))
+        self.structural_output_text.grid(row=7, column=1, padx=10, pady=10)
+
+
         def show_unit_results():
             try:
                 user_value=float(self.user_measurement_entry.get())
@@ -726,7 +730,12 @@ Median: {output[3]}
                 original_measurement=structural.OriginalMeasurement(user_value, user_unit)
                 adapter=structural.MeasurementAdapter(original_measurement=original_measurement)
                 meters_value=adapter.get_meters_measurement()
-                self.create_label(f"The measurement in meters is: {meters_value} m", 1,7, self.structural_frame, font_size=12)
+
+                self.structural_output_text.configure(state="normal")
+                self.structural_output_text.delete(1.0, tk.END)
+                self.structural_output_text.insert(tk.END, f"The measurement in meters is: {meters_value} m")
+                self.structural_output_text.configure(state="disabled")
+                
             except ValueError:
                 messagebox.showerror("Error", "Please enter a valid measurement value")
         
