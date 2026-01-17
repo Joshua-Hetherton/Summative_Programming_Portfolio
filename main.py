@@ -61,8 +61,8 @@ class GUI:
         self.search_gui()
         self.palindrome_gui()
         self.creational_gui()
-        #self.structural_gui()
-        # self.behavioural_gui()
+        self.structural_gui()
+        self.behavioural_gui()
 
 
 
@@ -657,7 +657,7 @@ Median: {output[3]}
         :param self: Description
         """
 
-        self.create_label("Prototype Design Pattern", 1,0, self.creational_frame, font_size=16)
+        self.create_label("Prototype Creational Design Pattern", 1,0, self.creational_frame, font_size=16)
         self.create_label("An implementation of the prototype deisgn pattern using RocketEngines", 1, 1, self.creational_frame)
 
         self.prototype_manager= creational.PrototypeManager()
@@ -702,10 +702,36 @@ Median: {output[3]}
                 print(e)
         self.create_button("Create Engine", 1,8, lambda: create_user_engine(), "lightgrey", self.creational_frame)
     
-    def behavioural_gui():
+    def behavioural_gui(self):
         pass
 
-    def structural_gui():
+    def structural_gui(self):
+        
+        self.create_label("Adapter Structural Design Pattern", 1,0, self.structural_frame, font_size=16)
+        self.create_label("Uses an Adapter to allow incompatible measurement units to work together, by adapting them all to meters", 1, 1, self.structural_frame)
+        
+        self.create_label("Enter measurement value:", 1, 2, self.structural_frame)
+        self.user_measurement_entry=self.create_entry(1,3, self.structural_frame)
+        
+        self.create_label("Select measurement unit:", 1, 4, self.structural_frame)
+        self.measurement_unit_selection=ttk.Combobox(self.structural_frame, values=[ "meters", "kilometers", "gigameters", "miles", "feet", "inches"])
+        self.measurement_unit_selection.current(0)
+        self.measurement_unit_selection.configure(state="readonly")
+        self.measurement_unit_selection.grid(row=5, column=1)
+
+        def show_unit_results():
+            try:
+                user_value=float(self.user_measurement_entry.get())
+                user_unit=self.measurement_unit_selection.get()
+                original_measurement=structural.OriginalMeasurement(user_value, user_unit)
+                adapter=structural.MeasurementAdapter(original_measurement=original_measurement)
+                meters_value=adapter.get_meters_measurement()
+                self.create_label(f"The measurement in meters is: {meters_value} m", 1,7, self.structural_frame, font_size=12)
+            except ValueError:
+                messagebox.showerror("Error", "Please enter a valid measurement value")
+        
+        self.create_button("Convert", 1, 6, lambda: show_unit_results(), "lightgrey", self.structural_frame)
+
         pass
 
 def main():
