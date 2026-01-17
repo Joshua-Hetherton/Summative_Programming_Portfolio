@@ -329,9 +329,10 @@ class GUI:
     ##Dynamic Programminga
     def nth_fib_gui(self):
         """
-        Docstring for nth_fib_gui
+        The Nth Fibonacci GUI Implementation.
+        An integer is collected from the user, and passed through the nth_fib.fibonacci function to get the nth fibonacci number using that integer.
+        This is done using recursion, a type of dynamic programming.
         
-        :param self: Description
         """
         self.create_label("Nth Fibonacci",1,0, self.fib_frame, font_size=16)
         self.create_label("Finds the Nth Fibonacci number using Dynamic Programming", 1,1, self.fib_frame)
@@ -361,9 +362,10 @@ class GUI:
     ##Sorting
     def sorting_gui(self):
         """
-        Docstring for sorting_gui
+        The sorting GUI uses drop down boxes to allow the user to select which sorting algorithm and what order they want the array sorted into.
+        The drop down boxes are readonly, preventing the user from enetering invalid functions.
+        The user inputs their array into the entry box, seperated by commas.
         
-        :param self: Description
         """
         self.create_label("Sorting Algorithms",1,0 ,self.sorting_frame, font_size=16)
         self.create_label("Select the sorting algorithm from the dropdown box below,input the numbers you would like sorted,\nand choose how you want them ordered",1,1,self.sorting_frame)
