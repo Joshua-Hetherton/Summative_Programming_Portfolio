@@ -155,6 +155,7 @@ def test_creational():
     except AssertionError:
         print("Creational Design Pattern Test Failed")
 def call_all_tests():
+    start_time=time.time()
     test_brute_force_merge()
     test_factorial_calc()
     test_nth_fib()
@@ -166,6 +167,8 @@ def call_all_tests():
     test_behavioral()
     test_structural()
     test_creational()
+    end_time=time.time()
+    print(f"All Tests Completed in {end_time - start_time} seconds")
 
 if __name__ == "__main__":
     call_all_tests()
