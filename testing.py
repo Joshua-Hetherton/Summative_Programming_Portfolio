@@ -46,7 +46,7 @@ def test_nth_fib():
 def test_palindrome_substrings_count():
     try:
         print("Commencing Palindrome Substring Tests...")
-        assert palindrome.palindrome_substrings_count("a")==2
+        assert palindrome.palindrome_substrings_count("a")==1
         assert palindrome.palindrome_substrings_count("aa")==3
         assert palindrome.palindrome_substrings_count("ab")==2
         assert palindrome.palindrome_substrings_count("abba")==6
@@ -69,17 +69,28 @@ def test_random_deck():
 def test_rsa_encryption():
     try:
         print("Commencing RSA Encryption Tests...")
-        #Key Generation Test
+        #Key Generation Test with no User input:
         valid, e, n, d, p, q= rsa_encryption.key_generation(0, 0)
         assert valid==True
         assert rsa_encryption.is_prime(p)==True
         assert rsa_encryption.is_prime(q)==True
-
+        
         #Encryption and Decryption Tests:
         message="Hello World!"
         cipher_text=rsa_encryption.encryption(message, e, n)
         decrypted_message=rsa_encryption.decryption(cipher_text, d, n)
         assert message==decrypted_message
+
+        #Key Generation Test WITH user input:
+        valid, e, n, d, p, q= rsa_encryption.key_generation(7727, 7741)
+        assert valid==True
+        assert rsa_encryption.is_prime(p)==True
+        assert rsa_encryption.is_prime(q)==True
+        message="Hello World"
+        cipher_text=rsa_encryption.encryption(message, e, n)
+        decrypted_message=rsa_encryption.decryption(cipher_text, d, n)
+        assert message==decrypted_message
+
     except AssertionError:
         print("RSA Encryption Test Failed!")
 
