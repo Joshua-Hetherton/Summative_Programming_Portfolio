@@ -663,15 +663,16 @@ Median: {output[3]}
         self.prototype_manager= creational.PrototypeManager()
 
         #DropDown box for engine type
-        engine_type=ttk.Combobox(self.creational_frame, values=["Liquid Fuel Engine", "Solid Fuel Engine"])
-        engine_type.current(0).configure(state="readonly")
+        engine_type=ttk.Combobox(self.creational_frame, values=self.prototype_manager.get_engine_types())
+        engine_type.current(0)
+        engine_type.configure(state="readonly")
         engine_type.grid(row=2,column=1)
 
-        self.create_label("Enter Engine Name:", 1, 2, self.creational_frame)
-        self.engine_name_entry=self.create_entry(1,3, self.creational_frame)
+        self.create_label("Enter Engine Name:", 1, 3, self.creational_frame)
+        self.engine_name_entry=self.create_entry(1,4, self.creational_frame)
 
-        self.create_label("Enter Additional Features(seperated by commas):", 1, 4, self.creational_frame)
-        self.engine_features_entry=self.create_entry(1,5, self.creational_frame)
+        self.create_label("Enter Additional Features(seperated by commas):", 1, 5, self.creational_frame)
+        self.engine_features_entry=self.create_entry(1,6, self.creational_frame)
 
         self.creational_output_text=scrolledtext.ScrolledText(self.creational_frame, width=50, height=20, wrap=tk.WORD, font=("Arial", 12))
         self.creational_output_text.grid(row=7, column=1, padx=10, pady=10)
@@ -689,7 +690,7 @@ Median: {output[3]}
                 
                 engine=self.prototype_manager.create_custom_engine(engine_name, base_engine, engine_features)
                 
-                if engine == None:
+                if engine is None:
                     messagebox.showerror("Error", "Something went wrong. Please try again")
                     return
 
@@ -699,7 +700,7 @@ Median: {output[3]}
                 self.creational_output_text.configure(state="disabled")
             except Exception as e:
                 print(e)
-        self.create_button("Create Engine", 1,6, lambda: create_user_engine(), "lightgrey", self.creational_frame)
+        self.create_button("Create Engine", 1,8, lambda: create_user_engine(), "lightgrey", self.creational_frame)
     
     def behavioural_gui():
         pass
