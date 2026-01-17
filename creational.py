@@ -2,6 +2,7 @@
 Creational Design Pattern Module:
 Prototyping Rocket Engines
 """
+import copy
 class RocketEngine:
     def __init__(self, name, engine_type,thrust):
         self.name=name
@@ -19,8 +20,8 @@ class RocketEngine:
         pass
     
     def clone(self):
-        
-        pass
+        return copy.deepcopy(self)
+
     def add_features(self):
         pass
 
