@@ -207,21 +207,6 @@ class GUI:
         Docstring for rsa_encryption_gui
 
         """
-        self.create_label("RSA Encryption Algorithm", 1, 0, self.rsa_frame, font_size=16)
-        self.create_label("Encrypt a message using RSA. You may input your own primes for your keys, or let the system automatically assign them", 1, 1, self.rsa_frame)
-        
-        self.create_label("Enter Prime q and p (Leave blank for system assigned primes). Integers Only: ", 1,2, self.rsa_frame)
-        self.prime_q_entry=self.create_entry(1,3, self.rsa_frame)
-        self.prime_p_entry=self.create_entry(1,4, self.rsa_frame)
-
-        self.create_label("Enter your Message:", 1, 5, self.rsa_frame)
-        self.user_giventext=scrolledtext.ScrolledText(self.rsa_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
-        self.user_giventext.grid(row=6, column=1, padx=10, pady=10)
-
-        self.create_label("Encrypted/Decrypted Message:",1,7, self.rsa_frame)
-        self.output_text=scrolledtext.ScrolledText(self.rsa_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
-        self.output_text.grid(row=8, column=1, padx=10, pady=10)
-
         def rsa_encrypt():
             """
             Docstring for rsa_encryption
@@ -235,7 +220,7 @@ class GUI:
                     messagebox.showinfo("Info", "System allocated Primes are being used")
                 user_message=self.user_giventext.get(1.0, tk.END)
                 
-                sucess, e, d, n, p, q = rsa_encryption.key_generation(int(user_p), int(user_q))
+                sucess, e, n, d, p, q = rsa_encryption.key_generation(int(user_p), int(user_q))
                 if not sucess:
                     messagebox.showerror("Error Occurred", "please ensure if any primes are entered, that they are valid")
                 
@@ -244,11 +229,12 @@ class GUI:
                 self.output_text.configure(state="normal")
                 self.output_text.delete(1.0, tk.END)
                 self.output_text.insert(tk.END, encrypted_message)
+                self.output_text.insert(tk.END, f"\n e:{e}, n:{n}, d:{d}, p:{p}, q:{q}")
                 self.output_text.configure(state="disabled")
 
                 #storing values for decryption
                 self.encryption_values= [d, n, p, q, user_message]
-                
+
 
             # except ValueError:
                 
@@ -256,17 +242,90 @@ class GUI:
 
             except Exception as e:
                 print(e)
+        
+        canvas_frame=tk.Canvas(self.rsa_frame, width=860, height=700)
+        canvas_frame.grid(row=0, column=0,sticky="nsew")
+
+
+        vertical_scrollbar=tk.Scrollbar(self.rsa_frame,orient="vertical", command=canvas_frame.yview)
+        vertical_scrollbar.grid(row=0, column=1, sticky="nes")
+
+        canvas_frame.configure(yscrollcommand = vertical_scrollbar.set)
+        
+        self.rsa_frame.grid_rowconfigure(0, weight=1)
+        self.rsa_frame.grid_columnconfigure(0, weight=1)
+
+        inner_scrollable_frame=tk.Frame(canvas_frame, bg="lightblue", width=860, height=1400)
+        inner_scrollable_frame.bind("<Configure>", lambda e: canvas_frame.configure(scrollregion=canvas_frame.bbox("all")))
+
+        canvas_frame.create_window((0,0), window=inner_scrollable_frame, anchor="nw")
+        #Encryption Part of the frame
+
+        self.create_label("RSA Encryption Algorithm", 1, 0, inner_scrollable_frame, font_size=16)
+        self.create_label("Encrypt a message using RSA. You may input your own primes for your keys, or let the system automatically assign them", 1, 1, inner_scrollable_frame)
+        
+        self.create_label("Enter Prime q and p (Leave blank for system assigned primes). Integers Only: ", 1,2, inner_scrollable_frame)
+        self.prime_q_entry=self.create_entry(1,3, inner_scrollable_frame)
+        self.prime_p_entry=self.create_entry(1,4, inner_scrollable_frame)
+
+        self.create_label("Enter your Message:", 1, 5, inner_scrollable_frame)
+        self.user_giventext=scrolledtext.ScrolledText(inner_scrollable_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
+        self.user_giventext.grid(row=6, column=1, padx=10, pady=10)
+
+        self.create_label("CipherText:", 1, 7, inner_scrollable_frame)
+        self.output_text=scrolledtext.ScrolledText(inner_scrollable_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
+        self.output_text.grid(row=8, column=1, padx=10, pady=10)
+
+        self.create_button("Encrypt Message", 1, 9, lambda:rsa_encrypt(), "lightgrey", inner_scrollable_frame)
+
         def rsa_decrypt():
             """
             Docstring for rsa_decrypt
             """
-            pass
+            try:
+                user_d=self.d_entry.get()
+                user_n=self.n_entyry.get()
+                #Adds commas between each part of the cipher text
+                cipher_text=self.cipher_text_given.get(1.0, tk.END).replace(" ", ",")
+                decrypted_message=rsa_encryption.decryption(cipher_text, int(user_d), int(user_n))
+                self.cipher_text_given.configure(state="normal")
+                self.cipher_text_given.delete(1.0, tk.END)
+                self.cipher_text_given.insert(tk.END, decrypted_message)
+
+                self.cipher_text_given.configure(state="disabled")
+            except Exception as e:
+                print(e)
+
+        #Decryption Part of the frame
+        self.create_label("RSA Decryption", 1, 11, inner_scrollable_frame, font_size=14)
+        self.create_label("Use the values d and n generated during the encryption process to decrypt the message", 1, 12, inner_scrollable_frame)
+
+        self.create_label("Enter d", 1, 13, inner_scrollable_frame)
+        self.d_entry=self.create_entry(1,14, inner_scrollable_frame)
+        self.create_label("Enter n", 1, 15, inner_scrollable_frame)
+        self.n_entyry=self.create_entry(1,16, inner_scrollable_frame)
+
+        self.create_label("Enter your Message to Decrypt:", 1, 17, inner_scrollable_frame)
+        self.cipher_text_given=scrolledtext.ScrolledText(inner_scrollable_frame,width=50, height=10, wrap=tk.WORD, font=("Arial", 12))
+        self.cipher_text_given.grid(row=18, column=1, padx=10, pady=10)
+
+        self.create_button("Decrypt Message", 1, 19, lambda:rsa_decrypt(), "lightgrey", inner_scrollable_frame)
+
+
+        
+
+
+
+        
+
+
+
+
+
+        
 
         #Encrypt Button
-        self.create_button("Encrypt Message", 1,9, lambda: rsa_encrypt(), "lightgrey", self.rsa_frame)
 
-        #Decrypt Button
-        self.create_button("Decrypt Message", 1,10, lambda: rsa_decrypt(), "lightgrey", self.rsa_frame)
 
     ##Dynamic Programminga
     def nth_fib_gui(self):
