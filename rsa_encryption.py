@@ -94,11 +94,8 @@ def key_generation(user_p=0, user_q=0, user_e=65537):
     n= p * q
     euluers_totient=(p-1)*(q-1)
 
-    #Making sure that n is a very large number
-    if not n > 100000000:
-        messagebox.showinfo("Key Generation Error", "the product of p and q must be a larger number (n>100,000,000)")
-    else:
-        exponent_e= user_e
+    
+    exponent_e= user_e
 
     #Validating exponent_e
     if not (1 < exponent_e < euluers_totient and greatest_common_divisor(exponent_e, euluers_totient)==1):
