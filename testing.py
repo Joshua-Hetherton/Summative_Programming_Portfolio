@@ -135,7 +135,7 @@ def test_behavioral():
 def test_structural():
     try:
         original_measurement=structural.OriginalMeasurement(10, "feet")
-        adapted_value=structural.MeasurementAdapter.convert_to_meters(original_measurement)
+        adapted_value=structural.MeasurementAdapter(original_measurement).get_meters_measurement()
         assert adapted_value == 3.048
     except AssertionError:
         print("Structural Design Pattern Test Failed")
