@@ -18,13 +18,35 @@ class PrelaunchState(MissionState):
         return "Spacecraft is in a prelaunch state, and is ready for lift-off if fuel levels are sufficient."
 
 class LaunchState(MissionState):
-    pass
+    def next_state(self,spacecraft):
+        spacecraft.fuel=spacecraft.get_fuel_level()-50
+        spacecraft.state=OrbitState()
+    def name(self):
+        return "Launch"
+    
+    def description(self):
+        return "Spacecraft is launching, consuming fuel. It is now going to get to orbit."
+    
 
 class OrbitState(MissionState):
-    pass
+    def next_state(self,spacecraft):
+        spacecraft.fuel=spacecraft.get_fuel_level()-30
+        spacecraft.state=ReEntryState()
+    def name(self):
+        return "Orbit"
+    
+    def description(self):
+        return "Spacecraft is in orbit, orbiting round Earth. It is now ready to burn fuel to re-enter the atmospehre"
 
 class ReEntryState(MissionState):
-    pass
+    def next_state(self,spacecraft):
+        spacecraft.fuel=spacecraft.get_fuel_level()-spacecraft.get_fuel_level()
+        spacecraft.state=PrelaunchState()
+    def name(self):
+        return "Re-Entry"
+    
+    def description(self):
+        return "Spacecraft is now rentering the atmosphere, all fuel has been consumed and the engine and fuel are jettisoned."
 
 class Spacecraft:
     def __init__(self):
