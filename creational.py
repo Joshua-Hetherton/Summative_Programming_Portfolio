@@ -12,7 +12,7 @@ class RocketEngine:
         self.specific_impulse=0.0
 
         self.fuel_type=""
-        self.oxidizer_type=""
+        self.oxidiser_type=""
         self.mixture_ratio=0.0
 
         self.features=[]
@@ -35,11 +35,24 @@ self.thrust: {self.thrust} kN
 self.burn_time: {self.burn_time} seconds
 self.specific_impulse: {self.specific_impulse} seconds
 self.fuel_type: {self.fuel_type}
-self.oxidizer_type: {self.oxidizer_type}
+self.oxidiser_type: {self.oxidiser_type}
 self.mixture_rati: {self.mixture_ratio}
 ==========================
 Additional Features:
 {", ".join(self.features)}
 
 """
-        pass
+
+class PrototypeManager:
+    def __init__(self):
+        self.prototypes={}
+        self.initialise_engines()
+    def intialise_engines(self):
+        #Liquid Fuel Rocket Engine
+        LF_engine=RocketEngine("LF-1", "Liquid Fuel", 500)
+        LF_engine.burn_time=230
+        LF_engine.specific_impulse=205.5
+        LF_engine.fuel_type="Refined Petroleum"
+        LF_engine.oxidiser_type="Liquid Oxygen"
+        LF_engine.mixture_ratio=2.5
+
