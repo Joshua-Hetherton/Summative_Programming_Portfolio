@@ -77,8 +77,8 @@ def test_rsa_encryption():
 
         #Encryption and Decryption Tests:
         message="Hello World!"
-        cipher_text=rsa_encryption.encrypt_message(message, e, n)
-        decrypted_message=rsa_encryption.decrypt_message(cipher_text, d, n)
+        cipher_text=rsa_encryption.encryption(message, e, n)
+        decrypted_message=rsa_encryption.decryption(cipher_text, d, n)
         assert message==decrypted_message
     except AssertionError:
         print("RSA Encryption Test Failed!")
