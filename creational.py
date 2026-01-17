@@ -75,7 +75,7 @@ class PrototypeManager:
         else:
             return None
         
-    def create_engine(self, new_engine, engine_type, features):
+    def create_custom_engine(self, new_engine, engine_type, features):
         engine=self.create_engine(engine_type)
         if engine is not None:
             engine.name=new_engine
